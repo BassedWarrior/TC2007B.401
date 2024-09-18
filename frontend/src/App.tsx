@@ -7,6 +7,7 @@ import {
 } from "react-admin";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
+import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
 
 export const App = () => (
   <Admin layout={Layout} dataProvider={dataProvider}>
@@ -17,10 +18,11 @@ export const App = () => (
       show={ShowGuesser}
     />
     <Resource
-      name="Users"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      name="Donadores"
+      list={DonadoresList}
+      edit={DonadoresEdit}
+      create={DonadoresCreate}
+      show={DonadoresShow}
     />
     <Resource
       name="Projects"
