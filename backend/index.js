@@ -26,7 +26,7 @@ const Admin = mongoose.model('Admin', AdminSchema);
 
 app.post('/api/admins', async (req, res) => {
   try {
-    const newAdmin = new Post(req.body);
+    const newAdmin = new Admin(req.body);
     await newAdmin.save();
     res.status(201).json(newAdmin);
   } catch (error) {
@@ -36,7 +36,7 @@ app.post('/api/admins', async (req, res) => {
 
 app.post('/api/admins', async (req, res) => {
     try {
-        const newAdmin = new Post({ // Obtiene los datos de la respuesta
+        const newAdmin = new Admin({ // Obtiene los datos de la respuesta
             usuario: req.body.title,
             contrasena: req.body.content
         });
