@@ -7,6 +7,7 @@ import {
 } from "react-admin";
 import {
     ProyectosList,
+    ProyectosEdit,
 } from "./proyectos";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
@@ -30,7 +31,7 @@ export const App = () => (
     <Resource
       name="Projects"
       list={ProyectosList}
-      edit={EditGuesser}
+      edit={ProyectosEdit}
       show={ShowGuesser}
     />
   </Admin>
