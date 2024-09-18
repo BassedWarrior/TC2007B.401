@@ -8,14 +8,16 @@ import {
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
+import { DonacionesCreate, DonacionesEdit, DonacionesList, DonacionesShow } from "./donaciones";
 
 export const App = () => (
   <Admin layout={Layout} dataProvider={dataProvider}>
     <Resource
-      name="Donations"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      name="Donaciones"
+      list={DonacionesList}
+      edit={DonacionesEdit}
+      create={DonacionesCreate}
+      show={DonacionesShow}
     />
     <Resource
       name="Donadores"
