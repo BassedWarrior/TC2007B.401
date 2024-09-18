@@ -12,6 +12,8 @@ import {
     NumberInput,
     DateInput,
     RadioButtonGroupInput,
+    Show,
+    SimpleShowLayout,
 } from "react-admin";
 
 export const ProyectosList = () => (
@@ -56,4 +58,29 @@ export const ProyectosEdit = () => (
             <NumberInput source="objetivo" />
         </SimpleForm>
     </Edit>
+);
+
+export const ProyectosShow = () => (
+    <Show>
+        <SimpleShowLayout>
+            <TextField source="nombre" />
+            <TextField source="descrpción" />
+            <DateField source="inicio" />
+            <DateField source="fin" />
+            <SelectField source="estado" choices={[
+                { id: "planeado", name: "Planeado" },
+                { id: "en progreso", name: "En Progreso" },
+                { id: "completado", name: "Completado" },
+                { id: "cancelado", name: "Cancelado" },
+            ]} />
+            <NumberField source="presupuesto" options={{
+                style: "currency",
+                currency: "MXN",
+            }} />
+            <NumberField source="objetivo" options={{
+                style: "currency",
+                currency: "MXN",
+            }} />
+        </SimpleShowLayout>
+    </Show>
 );

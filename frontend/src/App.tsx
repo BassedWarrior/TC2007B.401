@@ -8,6 +8,7 @@ import {
 import {
     ProyectosList,
     ProyectosEdit,
+    ProyectosShow,
 } from "./proyectos";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
@@ -32,7 +33,7 @@ export const App = () => (
       name="Projects"
       list={ProyectosList}
       edit={ProyectosEdit}
-      show={ShowGuesser}
+      show={ProyectosShow}
     />
   </Admin>
 );
