@@ -5,6 +5,9 @@ import {
   EditGuesser,
   ShowGuesser,
 } from "react-admin";
+import {
+    ProyectosList,
+} from "./proyectos";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
@@ -26,7 +29,7 @@ export const App = () => (
     />
     <Resource
       name="Projects"
-      list={ListGuesser}
+      list={ProyectosList}
       edit={EditGuesser}
       show={ShowGuesser}
     />
