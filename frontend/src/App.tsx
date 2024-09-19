@@ -8,9 +8,10 @@ import {
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
+import { authProvider } from "./Login";
 
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider}>
+  <Admin layout={Layout} dataProvider={dataProvider} authProvider={authProvider}>
     <Resource
       name="Donations"
       list={ListGuesser}
