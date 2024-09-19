@@ -4,7 +4,6 @@ import {
   ListGuesser,
   EditGuesser,
   ShowGuesser,
-  CreateGuesser,
 } from "react-admin";
 import { Layout } from "./Layout";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
