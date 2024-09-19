@@ -20,14 +20,14 @@ export const App = () => (
       show={ShowGuesser}
     />
     <Resource
-      name="Donadores"
+      name="donadores"
       list={DonadoresList}
       edit={DonadoresEdit}
       create={DonadoresCreate}
       show={DonadoresShow}
     />
     <Resource
-      name="Projects"
+      name="donaciones"
       list={ListGuesser}
       edit={EditGuesser}
       show={ShowGuesser}
