@@ -8,7 +8,12 @@ import {
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
-import { DonacionesCreate, DonacionesEdit, DonacionesList, DonacionesShow } from "./donaciones";
+import {
+    DonacionesCreate,
+    DonacionesEdit,
+    DonacionesList,
+    DonacionesShow
+} from "./donaciones";
 
 export const App = () => (
   <Admin layout={Layout} dataProvider={dataProvider}>

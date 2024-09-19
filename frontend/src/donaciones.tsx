@@ -1,10 +1,29 @@
-import {List, Datagrid, Edit, SimpleForm, TextField, TextInput, NumberField, NumberInput, DateField, DateInput, Create, EmailField, RadioButtonGroupInput, ReferenceField, ReferenceInput} from 'react-admin'
+import {
+    List,
+    Datagrid,
+    Edit,
+    SimpleForm,
+    TextField,
+    TextInput,
+    NumberField,
+    NumberInput,
+    DateField,
+    DateInput,
+    Create,
+    EmailField,
+    RadioButtonGroupInput,
+    ReferenceField,
+    ReferenceInput
+} from 'react-admin';
 
 export const DonacionesList = () =>(
     <List>
         <Datagrid>
             <TextField source = "tipo"/>
-            <NumberField source = "monto" options={{ style: 'currency', currency: 'MXN' }}/>
+            <NumberField source = "monto" options={{
+                style: 'currency',
+                currency: 'MXN'
+            }} />
             <DateField source = "fecha"/>
             <ReferenceField source = "email" reference = "donadores"/>
         </Datagrid>
@@ -43,9 +62,12 @@ export const DonacionesShow = () =>(
     <List>
         <Datagrid>
         <TextField source = "tipo"/>
-            <NumberField source = "monto" options={{ style: 'currency', currency: 'MXN' }}/>
+            <NumberField source = "monto" options={{
+                style: 'currency',
+                currency: 'MXN'
+            }} />
             <DateField source = "fecha"/>
             <ReferenceField source = "email" reference = "donadores"/>
         </Datagrid>
     </List>
-)
+);
