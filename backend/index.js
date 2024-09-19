@@ -126,22 +126,30 @@ app.get('/api/donadores', async (req,res) => {
   }
 });
 
-app.post('/api/donadores', async (req, res) => {
+app.put('/api/donadores/:id', async (req, res) => {
     try {
-        const newDonador = new Donador({ // Obtiene los datos de la respuesta
-            nombre: req.body.nombre,
-            correo: req.body.correo
-        });
-        const savedDonador = await newDonador.save(); // Guardar el nuevo post en la base de datos
-        res.status(201).json({
-            id: savedDonador._id, 
-            nombre: savedDonador.nombre,
-            correo: savedDonador.correo
+        const updatedDonador = await Donador.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedDonador) return res.status(404).json({ error: 'Donador no encontrado' });
+        res.json({
+            id: updatedDonador._id,
+            nombre: updatedDonador.nombre,
+            correo: updatedDonador.correo
         });
     } catch (err) {
-        res.status(500).json({ error: 'Error al crear el donador' }); // Responde con un error si algo falla
+        res.status(500).json({ error: 'Error al actualizar el donador' });
     }
 });
+
+app.delete('/api/donadores/:id', async (req, res) => {
+    try {
+        const deletedDonador = await Donador.findByIdAndDelete(req.params.id);
+        if (!deletedDonador) return res.status(404).json({ error: 'Donador no encontrado' });
+        res.json({ message: 'Donador eliminado' });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al eliminar el donador' });
+    }
+});
+
 
 app.get('/api/donaciones', async (req,res) => {
   try {
