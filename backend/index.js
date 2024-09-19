@@ -80,6 +80,20 @@ app.get('/api/admins', async (req,res) => {
   }
 });
 
+app.put('/api/admins/:id', async (req, res) => {
+    try {
+        const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedAdmin) return res.status(404).json({ error: 'Administrador no encontrado' });
+        res.json({
+            id: updatedAdmin._id,
+            usuario: updatedAdmin.usuario,
+            contrasena: updatedAdmin.contrasena
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar los datos del administrador' });
+    }
+});
+
 app.post('/api/donadores', async (req, res) => {
     try {
         const newDonador = new Donador({ // Obtiene los datos de la respuesta
