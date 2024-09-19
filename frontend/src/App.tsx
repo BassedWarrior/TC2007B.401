@@ -9,6 +9,7 @@ import {
     ProyectosList,
     ProyectosEdit,
     ProyectosShow,
+    ProyectosCreate,
 } from "./proyectos";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
@@ -34,6 +35,7 @@ export const App = () => (
       list={ProyectosList}
       edit={ProyectosEdit}
       show={ProyectosShow}
+      create={ProyectosCreate}
     />
   </Admin>
 );

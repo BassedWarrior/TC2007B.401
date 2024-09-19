@@ -14,6 +14,8 @@ import {
     RadioButtonGroupInput,
     Show,
     SimpleShowLayout,
+    Create,
+    required,
 } from "react-admin";
 
 export const ProyectosList = () => (
@@ -83,4 +85,23 @@ export const ProyectosShow = () => (
             }} />
         </SimpleShowLayout>
     </Show>
+);
+
+export const ProyectosCreate = () => (
+    <Create>
+        <SimpleForm>
+            <TextInput source="nombre" validate={[required()]} />
+            <TextInput source="descripción" validate={[required()]} />
+            <DateInput source="inicio" />
+            <DateInput source="fin" />
+            <RadioButtonGroupInput source="estado" choices={[
+                { id: "planeado", name: "Planeado" },
+                { id: "en progreso", name: "En Progreso" },
+                { id: "completado", name: "Completado" },
+                { id: "cancelado", name: "Cancelado" },
+            ]} validate={[required()]} />
+            <NumberInput source="presupuesto" />
+            <NumberInput source="objetivo" />
+        </SimpleForm>
+    </Create>
 );
