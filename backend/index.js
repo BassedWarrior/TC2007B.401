@@ -189,6 +189,33 @@ app.post('/api/donaciones', async (req, res) => {
     }
 });
 
+app.put('/api/donaciones/:id', async (req, res) => {
+    try {
+        const updatedDonacion = await Donacion.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedDonacion) return res.status(404).json({ error: 'Donación no encontrada' });
+        res.json({
+            id: updatedDonacion._id,
+            tipo: updatedDonacion.tipo,
+            monto: updatedDonacion.monto,
+            fecha: updatedDonacion.fecha,
+            donador: updatedDonacion.donador
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar la donación' });
+    }
+});
+
+app.delete('/api/donaciones/:id', async (req, res) => {
+    try {
+        const deletedDonacion = await Donacion.findByIdAndDelete(req.params.id);
+        if (!deletedDonacion) return res.status(404).json({ error: 'Donación no encontrada' });
+        res.json({ message: 'Donación eliminada' });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al eliminar la donación' });
+    }
+});
+
+
 app.post('/api/proyectos', async (req, res) => {
     try {
         const newProyecto = new Proyecto({
