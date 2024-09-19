@@ -14,6 +14,7 @@ import {
     RadioButtonGroupInput,
     Show,
     SimpleShowLayout,
+    EditButton,
     Create,
     required,
 } from "react-admin";
@@ -39,6 +40,7 @@ export const ProyectosList = () => (
                 style: "currency",
                 currency: "MXN",
             }} />
+            <EditButton/>
         </Datagrid>
     </List>
 );
