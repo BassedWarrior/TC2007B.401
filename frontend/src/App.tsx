@@ -31,7 +31,7 @@ export const App = () => (
       show={DonadoresShow}
     />
     <Resource
-      name="Projects"
+      name="Proyectos"
       list={ProyectosList}
       edit={ProyectosEdit}
       show={ProyectosShow}
