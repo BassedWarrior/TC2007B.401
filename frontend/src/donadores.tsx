@@ -4,7 +4,7 @@ export const DonadoresList = () =>(
     <List>
         <Datagrid>
             <TextField source = "nombre"/>
-            <EmailField source = "email"/>
+            <EmailField source = "correo"/>
         </Datagrid>
     </List>
 );
@@ -13,7 +13,7 @@ export const DonadoresEdit = () =>(
     <Edit>
         <SimpleForm>
             <TextInput source ="nombre"/>
-            <TextInput source="email"/>
+            <TextInput source="correo"/>
         </SimpleForm>
     </Edit>
 );
@@ -22,7 +22,7 @@ export const DonadoresCreate = () =>(
     <Create>
         <SimpleForm>
             <TextInput source = "nombre"/>
-            <TextInput source = "email"/>
+            <TextInput source = "correo"/>
         </SimpleForm>
     </Create>
 );
@@ -30,6 +30,6 @@ export const DonadoresCreate = () =>(
 export const DonadoresShow = () =>(
     <List>
         <TextField source = "nombre"/>
-        <EmailField source = "email"/>
+        <EmailField source = "correo"/>
     </List>
 )
