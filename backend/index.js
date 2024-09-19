@@ -263,6 +263,35 @@ app.get('/api/proyectos', async (req, res) => {
     }
 });
 
+app.put('/api/proyectos/:id', async (req, res) => {
+    try {
+        const updatedProyecto = await Proyecto.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedProyecto) return res.status(404).json({ error: 'Proyecto no encontrado' });
+        res.json({
+            id: updatedProyecto._id,
+            nombre: updatedProyecto.nombre,
+            descripcion: updatedProyecto.descripcion,
+            inicio: updatedProyecto.inicio,
+            fin: updatedProyecto.fin,
+            estado: updatedProyecto.estado,
+            presupuesto: updatedProyecto.presupuesto,
+            objetivo: updatedProyecto.objetivo,
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar el proyecto' });
+    }
+});
+
+app.delete('/api/proyectos/:id', async (req, res) => {
+    try {
+        const deletedProyecto = await Proyecto.findByIdAndDelete(req.params.id);
+        if (!deletedProyecto) return res.status(404).json({ error: 'Proyecto no encontrado' });
+        res.json({ message: 'Proyecto eliminado' });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al eliminar el proyecto' });
+    }
+});
+
 app.get('/', (req, res) => {
   res.send("This is the backend URI")
 });
