@@ -2,6 +2,7 @@ import {
     List,
     Datagrid,
     Edit,
+    EditButton,
     SimpleForm,
     TextField,
     TextInput,
@@ -26,6 +27,7 @@ export const DonacionesList = () =>(
             }} />
             <DateField source = "fecha"/>
             <ReferenceField source = "email" reference = "donadores"/>
+            <EditButton />
         </Datagrid>
     </List>
 );
