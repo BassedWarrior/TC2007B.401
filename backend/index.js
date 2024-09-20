@@ -186,22 +186,25 @@ app.post('/api/registro',  async (req, res) => {
 });
 
 // Autenticar a un usuario
-app.get('/api/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     try {  
         const { contrasena, usuario } = req.body;
         const user = await Admin.findOne({ usuario });
+        if(!user){
+          return res.status(401).json({ error: 'Usuario Incorrecto' });
+        }
         const isMatch = await bcrypt.compare(contrasena, user.contrasena);
-        if (!user || !isMatch) {
-            return res.status(401).json({ error: 'Credenciales Incorrectas' });
+        if (!isMatch) {
+            return res.status(401).json({ error: 'Contraseña Incorrecta' });
         }
         //if (user && await bcrypt.compare(password, user.password)) {
         if (user && isMatch) {
             const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.json({ token});
-        } else {
-            res.status(401).json({ error: 'Credenciales Incorrectas' });
-        }
+        } 
+        console.log(process.env.JWT_SECRET); 
     } catch (err) {
+        console.log(err)
         res.status(500).json({ error: 'Error al iniciar sesión' });
     }
 });
