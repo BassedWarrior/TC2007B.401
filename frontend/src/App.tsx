@@ -6,6 +6,12 @@ import {
   ShowGuesser,
   CreateGuesser,
 } from "react-admin";
+import {
+    ProyectosList,
+    ProyectosEdit,
+    ProyectosShow,
+    ProyectosCreate,
+} from "./proyectos";
 import { Layout } from "./Layout";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
 import jsonServerProvider from 'ra-data-json-server';
@@ -25,6 +31,13 @@ export const App = () => (
       edit={DonadoresEdit}
       create={DonadoresCreate}
       show={DonadoresShow}
+    />
+    <Resource
+      name="Proyectos"
+      list={ProyectosList}
+      edit={ProyectosEdit}
+      show={ProyectosShow}
+      create={ProyectosCreate}
     />
     <Resource
       name="donaciones"
