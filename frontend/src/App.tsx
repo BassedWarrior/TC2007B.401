@@ -16,7 +16,7 @@ import { Layout } from "./Layout";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
 import jsonServerProvider from 'ra-data-json-server';
 
-const dataProvider = jsonServerProvider('http://localhost:5001/api');
+const dataProvider = jsonServerProvider('https://localhost:5001/api');
 export const App = () => (
   <Admin layout={Layout} dataProvider={dataProvider}>
     <Resource
