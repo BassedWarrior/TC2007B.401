@@ -34,9 +34,10 @@ export const App = () => (
     />
     <Resource
       name="donaciones"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      list={DonacionesList}
+      edit={DonacionesEdit}
+      create={DonacionesCreate}
+      show={DonacionesShow}
     />
     <Resource
       name="Projects"
