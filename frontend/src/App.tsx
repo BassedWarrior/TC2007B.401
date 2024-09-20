@@ -14,7 +14,7 @@ import {
 import { Layout } from "./Layout";
 import { DonadoresList, DonadoresEdit, DonadoresCreate, DonadoresShow } from "./donadores";
 import jsonServerProvider from 'ra-data-json-server';
-import { authProvider } from "./Login";
+import authProvider from "./Login";
 
 const dataProvider = jsonServerProvider('http://localhost:5001/api');
 export const App = () => (
