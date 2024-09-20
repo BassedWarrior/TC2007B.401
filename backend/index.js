@@ -2,9 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 require('dotenv').config();
 const cors = require("cors");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const app = express();
-
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
@@ -164,6 +165,44 @@ app.post('/api/donaciones', async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({ error: 'Error al crear la donacion' }); // Responde con un error si algo falla
+    }
+});
+
+
+// Registrar un nuevo usuario
+app.post('/api/registro',  async (req, res) => {
+    try {
+        const { usuario, contrasena } = req.body;        
+        const Hashcontrasena = await bcrypt.hash(contrasena, 10);
+        const newAdmin = new Admin({ usuario, contrasena: Hashcontrasena });
+        await newAdmin.save();
+        res.status(201).json({ message: 'Usuario registrado con éxito' });
+        console.log("Usuario: ", usuario);
+        console.log("Contraseña Hasheada: ", Hashcontrasena);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error al registrar el usuario' });
+    }
+});
+
+// Autenticar a un usuario
+app.get('/api/login', async (req, res) => {
+    try {  
+        const { contrasena, usuario } = req.body;
+        const user = await Admin.findOne({ usuario });
+        const isMatch = await bcrypt.compare(contrasena, user.contrasena);
+        if (!user || !isMatch) {
+            return res.status(401).json({ error: 'Credenciales Incorrectas' });
+        }
+        //if (user && await bcrypt.compare(password, user.password)) {
+        if (user && isMatch) {
+            const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
+            res.json({ token});
+        } else {
+            res.status(401).json({ error: 'Credenciales Incorrectas' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error al iniciar sesión' });
     }
 });
 
