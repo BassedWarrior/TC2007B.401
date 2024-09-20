@@ -20,11 +20,10 @@ import {
   DonacionesShow
 } from "./donaciones";
 import jsonServerProvider from 'ra-data-json-server';
-import { authProvider } from "./Login";
 
 const dataProvider = jsonServerProvider('http://localhost:5001/api');
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider} authProvider={authProvider}>
+  <Admin layout={Layout} dataProvider={dataProvider}>
     <Resource
       name="admins"
       list={ListGuesser}
@@ -51,12 +50,6 @@ export const App = () => (
       edit={DonacionesEdit}
       create={DonacionesCreate}
       show={DonacionesShow}
-    />
-    <Resource
-      name="Projects"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
     />
   </Admin>
 );
