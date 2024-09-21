@@ -195,7 +195,7 @@ app.post('/api/registro',  async (req, res) => {
 // Autenticar a un usuario
 app.post('/api/login', async (req, res) => {
     try {  
-        const { contrasena, usuario } = req.body;
+        const { usuario, contrasena } = req.body;
         const user = await Admin.findOne({ usuario });
         if(!user){
           return res.status(401).json({ error: 'Usuario Incorrecto' });
