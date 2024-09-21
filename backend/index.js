@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 require('dotenv').config();
 const cors = require("cors");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");  // Utilizada para el encriptado de las contraseñas.
+const jwt = require("jsonwebtoken");  // Utilizado para mantener la sesión iniciada.
 
 const app = express();
 const PORT = process.env.PORT || 5000;
