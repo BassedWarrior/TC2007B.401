@@ -1,4 +1,15 @@
-import {List, Datagrid, Edit, SimpleForm, TextField, TextInput, Create, required, EmailField, EditButton} from 'react-admin'
+import {
+    List,
+    Datagrid,
+    Edit,
+    SimpleForm,
+    TextField,
+    TextInput,
+    Create,
+    required,
+    EmailField,
+    EditButton
+} from 'react-admin';
 
 export const DonadoresList = () =>(
     <List>
