@@ -3,7 +3,7 @@ import {
   Resource,
   ListGuesser,
   EditGuesser,
-  ShowGuesser
+  ShowGuesser,
 } from "react-admin";
 import {
     ProyectosList,
@@ -20,10 +20,11 @@ import {
   DonacionesShow
 } from "./donaciones";
 import jsonServerProvider from 'ra-data-json-server';
+import {authProvider} from "./Login";
 
 const dataProvider = jsonServerProvider('https://localhost:5001/api');
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider}>
+  <Admin layout={Layout} dataProvider={dataProvider} authProvider={authProvider}>
     <Resource
       name="admins"
       list={ListGuesser}

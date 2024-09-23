@@ -2,15 +2,22 @@ const express = require("express");
 const mongoose = require("mongoose");
 require('dotenv').config();
 const cors = require("cors");
+const bcrypt = require("bcryptjs");  // Utilizada para el encriptado de las contraseñas.
+const jwt = require("jsonwebtoken");  // Utilizado para mantener la sesión iniciada.
 const fs = require("fs");  // Required to access the filesystem.
 const https = require("https");  // Required to access the HTTPS protocol.
 
 const app = express();
-
 const PORT = process.env.PORT || 5000;
 
+// Políticas de Cross-Origin Resource Sharing (CORS)
+// Únicamente permite conexiones desde nuestro frontend.
 app.use(cors({
+  origin: 'https://localhost:5173', 
   exposedHeaders: ['X-Total-Count'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 mongoose.connect(process.env.MONGO_URI)
@@ -80,6 +87,20 @@ app.get('/api/admins', async (req,res) => {
   } catch (err) {
     res.status(500).json({ error: 'Error al obtener los administradores'});
   }
+});
+
+app.put('/api/admins/:id', async (req, res) => {
+    try {
+        const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedAdmin) return res.status(404).json({ error: 'Administrador no encontrado' });
+        res.json({
+            id: updatedAdmin._id,
+            usuario: updatedAdmin.usuario,
+            contrasena: updatedAdmin.contrasena
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar los datos del administrador' });
+    }
 });
 
 app.put('/api/admins/:id', async (req, res) => {
@@ -291,6 +312,45 @@ app.delete('/api/proyectos/:id', async (req, res) => {
         res.json({ message: 'Proyecto eliminado' });
     } catch (err) {
         res.status(500).json({ error: 'Error al eliminar el proyecto' });
+    }
+});
+
+
+// Registrar un nuevo usuario
+app.post('/api/registro',  async (req, res) => {
+    try {
+        const { usuario, contrasena } = req.body;        
+        const Hashcontrasena = await bcrypt.hash(contrasena, 10);
+        const newAdmin = new Admin({ usuario, contrasena: Hashcontrasena });
+        await newAdmin.save();
+        res.status(201).json({ message: 'Usuario registrado con éxito' });
+        console.log("Administrador registrado con éxito")
+        console.log("Usuario: ", usuario);
+        console.log("Contraseña Hasheada: ", Hashcontrasena);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error al registrar el usuario' });
+    }
+});
+
+// Autenticar a un usuario
+app.post('/api/login', async (req, res) => {
+    try {  
+        const { usuario, contrasena } = req.body;
+        const user = await Admin.findOne({ usuario });
+        if(!user){
+          return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
+        }
+        const isMatch = await bcrypt.compare(contrasena, user.contrasena);
+        if (!isMatch) {
+            return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
+        }
+        const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token});
+        console.log(process.env.JWT_SECRET); 
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: 'Error al iniciar sesión' });
     }
 });
 
