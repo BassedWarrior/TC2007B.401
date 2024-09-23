@@ -1,13 +1,11 @@
-// in src/authProvider.ts
 import { AuthProvider, PasswordInput } from "react-admin";
-import { API_URL } from "./config";
 
-const authProvider = {
+export const authProvider = ({
     // called when the user attempts to log in
     login: ({ username, password }: { username: string; password: string }) => {
         return new Promise((resolve, reject)=>{
             const xhr = new XMLHttpRequest();
-            const url = `${API_URL}/login`
+            const url = `${import.meta.env.VITE_API_URL}/login`
             xhr.open('POST', url, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -21,7 +19,7 @@ const authProvider = {
                         resolve(json);
                     } else{
                         console.error('Login failed: ', xhr.status, xhr,this.statusText);
-                        reject(new Error("Login failed"));
+                        reject(new Error("Inicio de sesión fallido"));
                     }
                 }
             };
@@ -60,6 +58,4 @@ const authProvider = {
         else {
             return Promise.reject();
     }}
-};
-
-export default authProvider;
+});

@@ -325,7 +325,6 @@ app.post('/api/registro',  async (req, res) => {
         await newAdmin.save();
         res.status(201).json({ message: 'Usuario registrado con éxito' });
         console.log("Administrador registrado con éxito")
-        console.log("Administrador registrado con éxito")
         console.log("Usuario: ", usuario);
         console.log("Contraseña Hasheada: ", Hashcontrasena);
     } catch (err) {
