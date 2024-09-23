@@ -82,6 +82,20 @@ app.get('/api/admins', async (req,res) => {
   }
 });
 
+app.put('/api/admins/:id', async (req, res) => {
+    try {
+        const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedAdmin) return res.status(404).json({ error: 'Administrador no encontrado' });
+        res.json({
+            id: updatedAdmin._id,
+            usuario: updatedAdmin.usuario,
+            contrasena: updatedAdmin.contrasena
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar los datos del administrador' });
+    }
+});
+
 app.post('/api/donadores', async (req, res) => {
     try {
         const newDonador = new Donador({ // Obtiene los datos de la respuesta
@@ -114,22 +128,30 @@ app.get('/api/donadores', async (req,res) => {
   }
 });
 
-app.post('/api/donadores', async (req, res) => {
+app.put('/api/donadores/:id', async (req, res) => {
     try {
-        const newDonador = new Donador({ // Obtiene los datos de la respuesta
-            nombre: req.body.nombre,
-            correo: req.body.correo
-        });
-        const savedDonador = await newDonador.save(); // Guardar el nuevo post en la base de datos
-        res.status(201).json({
-            id: savedDonador._id, 
-            nombre: savedDonador.nombre,
-            correo: savedDonador.correo
+        const updatedDonador = await Donador.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedDonador) return res.status(404).json({ error: 'Donador no encontrado' });
+        res.json({
+            id: updatedDonador._id,
+            nombre: updatedDonador.nombre,
+            correo: updatedDonador.correo
         });
     } catch (err) {
-        res.status(500).json({ error: 'Error al crear el donador' }); // Responde con un error si algo falla
+        res.status(500).json({ error: 'Error al actualizar el donador' });
     }
 });
+
+app.delete('/api/donadores/:id', async (req, res) => {
+    try {
+        const deletedDonador = await Donador.findByIdAndDelete(req.params.id);
+        if (!deletedDonador) return res.status(404).json({ error: 'Donador no encontrado' });
+        res.json({ message: 'Donador eliminado' });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al eliminar el donador' });
+    }
+});
+
 
 app.get('/api/donaciones', async (req,res) => {
   try {
@@ -166,6 +188,109 @@ app.post('/api/donaciones', async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({ error: 'Error al crear la donacion' }); // Responde con un error si algo falla
+    }
+});
+
+app.put('/api/donaciones/:id', async (req, res) => {
+    try {
+        const updatedDonacion = await Donacion.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedDonacion) return res.status(404).json({ error: 'Donación no encontrada' });
+        res.json({
+            id: updatedDonacion._id,
+            tipo: updatedDonacion.tipo,
+            monto: updatedDonacion.monto,
+            fecha: updatedDonacion.fecha,
+            donador: updatedDonacion.donador
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar la donación' });
+    }
+});
+
+app.delete('/api/donaciones/:id', async (req, res) => {
+    try {
+        const deletedDonacion = await Donacion.findByIdAndDelete(req.params.id);
+        if (!deletedDonacion) return res.status(404).json({ error: 'Donación no encontrada' });
+        res.json({ message: 'Donación eliminada' });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al eliminar la donación' });
+    }
+});
+
+
+app.post('/api/proyectos', async (req, res) => {
+    try {
+        const newProyecto = new Proyecto({
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            inicio: req.body.inicio,
+            fin: req.body.fin,
+            estado: req.body.estado,
+            presupuesto: req.body.presupuesto,
+            objetivo: req.body.objetivo,
+        });
+        const savedProyecto = await newProyecto.save();
+        res.status(201).json({
+            id: savedProyecto._id,
+            nombre: savedProyecto.nombre,
+            descripcion: savedProyecto.descripcion,
+            inicio: savedProyecto.inicio,
+            fin: savedProyecto.fin,
+            estado: savedProyecto.estado,
+            presupuesto: savedProyecto.presupuesto,
+            objetivo: savedProyecto.objetivo,
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al crear el proyecto' });
+    }
+});
+
+app.get('/api/proyectos', async (req, res) => {
+    try {
+        const proyectos = await Proyecto.find();
+        const proyectosWithId = proyectos.map(proyecto => ({
+            id: proyecto._id,
+            nombre: proyecto.nombre,
+            descripcion: proyecto.descripcion,
+            inicio: proyecto.inicio,
+            fin: proyecto.fin,
+            estado: proyecto.estado,
+            presupuesto: proyecto.presupuesto,
+            objetivo: proyecto.objetivo,
+        }));
+        res.set('X-Total-Count', proyectos.length);
+        res.json(proyectosWithId);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al obtener los proyectos' });
+    }
+});
+
+app.put('/api/proyectos/:id', async (req, res) => {
+    try {
+        const updatedProyecto = await Proyecto.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedProyecto) return res.status(404).json({ error: 'Proyecto no encontrado' });
+        res.json({
+            id: updatedProyecto._id,
+            nombre: updatedProyecto.nombre,
+            descripcion: updatedProyecto.descripcion,
+            inicio: updatedProyecto.inicio,
+            fin: updatedProyecto.fin,
+            estado: updatedProyecto.estado,
+            presupuesto: updatedProyecto.presupuesto,
+            objetivo: updatedProyecto.objetivo,
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar el proyecto' });
+    }
+});
+
+app.delete('/api/proyectos/:id', async (req, res) => {
+    try {
+        const deletedProyecto = await Proyecto.findByIdAndDelete(req.params.id);
+        if (!deletedProyecto) return res.status(404).json({ error: 'Proyecto no encontrado' });
+        res.json({ message: 'Proyecto eliminado' });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al eliminar el proyecto' });
     }
 });
 
