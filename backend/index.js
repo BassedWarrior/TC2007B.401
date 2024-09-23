@@ -339,11 +339,11 @@ app.post('/api/login', async (req, res) => {
         const { usuario, contrasena } = req.body;
         const user = await Admin.findOne({ usuario });
         if(!user){
-          return res.status(401).json({ error: 'Usuario Incorrecto' });
+          return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
         }
         const isMatch = await bcrypt.compare(contrasena, user.contrasena);
         if (!isMatch) {
-            return res.status(401).json({ error: 'Contraseña Incorrecta' });
+            return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
         }
         //if (user && await bcrypt.compare(password, user.password)) {
         if (user && isMatch) {
