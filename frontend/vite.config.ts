@@ -1,3 +1,4 @@
+import fs from "fs";
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -9,6 +10,10 @@ export default defineConfig({
     },
     server: {
         host: true,
+        https: {
+            key: fs.readFileSync("certs/server.key"),
+            cert: fs.readFileSync("certs/server.crt")
+        },
     },
     base: './',
 });
