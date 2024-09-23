@@ -345,7 +345,6 @@ app.post('/api/login', async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
         }
-        //if (user && await bcrypt.compare(password, user.password)) {
         if (user && isMatch) {
             const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.json({ token});
