@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Políticas de Cross-Origin Resource Sharing (CORS)
 // Únicamente permite conexiones desde nuestro frontend.
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: 'https://localhost:5173', 
   exposedHeaders: ['X-Total-Count'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
