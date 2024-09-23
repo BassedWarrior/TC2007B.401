@@ -4,6 +4,8 @@ require('dotenv').config();
 const cors = require("cors");
 const bcrypt = require("bcryptjs");  // Utilizada para el encriptado de las contraseñas.
 const jwt = require("jsonwebtoken");  // Utilizado para mantener la sesión iniciada.
+const fs = require("fs");  // Required to access the filesystem.
+const https = require("https");  // Required to access the HTTPS protocol.
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -220,4 +222,14 @@ app.get('/', (req, res) => {
   res.send("This is the backend URI")
 });
 
-app.listen(PORT, () => console.log(`Server runing on port: ${PORT}`));
+// Set the key and certificate for the server. These should be generated
+// locally and stored in the specified paths.
+const options = {
+    key: fs.readFileSync("certs/server.key"),
+    cert: fs.readFileSync("certs/server.crt")
+};
+
+// Create the server listener in the specified port using HTTPS instead of HTTP.
+https.createServer(options, app).listen(PORT, () => {
+    console.log(`Server running on https://localhost:${PORT}`);
+});
