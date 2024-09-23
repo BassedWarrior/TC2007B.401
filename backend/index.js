@@ -345,10 +345,8 @@ app.post('/api/login', async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
         }
-        if (user && isMatch) {
-            const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
-            res.json({ token});
-        } 
+        const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token});
         console.log(process.env.JWT_SECRET); 
     } catch (err) {
         console.log(err)
