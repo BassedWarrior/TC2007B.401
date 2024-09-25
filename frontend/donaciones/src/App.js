@@ -1,30 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
-import SandersToolBar from './componentes/SandersToolBar';
+import { BrowserRouter as Routes, Route, Router} from 'react-router-dom';
+import { AppBar } from '@mui/material';
+import Layout from './componentes/Layout';
+
+
+/*
+import Inicio from './paginas/Inicio';
+import Proyectos from './paginas/Proyectos';
+import Nosotros from './paginas/Nosotros';
+*/
+
 
 function App() {
   return (
+    <>
+    <Layout/>
     
-    <SandersToolBar/>
-
-    /*
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-    */
+    </>
+    
   );
 }
 
