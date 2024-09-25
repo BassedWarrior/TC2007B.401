@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import SandersToolBar from './componentes/SandersToolBar';
 
 function App() {
   return (
+    
+    <SandersToolBar/>
+
+    /*
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -19,15 +24,9 @@ function App() {
         </a>
       </header>
     </div>
+    */
   );
 }
 
 
-function Prueba(){
-  return(
-    <div>
-      <h1>Hola Mundo</h1>
-    </div>
-  );
-}
 export default App;
