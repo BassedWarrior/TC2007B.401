@@ -21,10 +21,11 @@ import {
 } from "./donaciones";
 import jsonServerProvider from 'ra-data-json-server';
 import {authProvider} from "./Login";
+import { Dashboard } from "./dashboard";
 
 const dataProvider = jsonServerProvider('https://localhost:5001/api');
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider} authProvider={authProvider}>
+  <Admin layout={Layout} dataProvider={dataProvider} authProvider={authProvider} dashboard={Dashboard}>
     <Resource
       name="admins"
       list={ListGuesser}
