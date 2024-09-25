@@ -1,17 +1,19 @@
 import React from 'react'
+import Pie from './Pie'
+import Barra from  './Barra'
 
-import { Routes } from 'react-router-dom'
+import Routes from './../../routes/Routers'
 
 const Layout = () => {
   return (
     <>
-      <Encabezado/>
 
+    <Barra/>
       <main>
         <Routes/>
       </main>
+    <Pie/>
 
-      <PiePagina/>
     </>
   )
 }

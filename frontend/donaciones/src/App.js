@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Routes, Route, Router} from 'react-router-dom';
+
 import { AppBar } from '@mui/material';
-import Layout from './componentes/Layout';
+import Layout from './componentes/jsx/Layout';
+import Routes from './routes/Routers'
 
 
 /*
@@ -16,7 +17,6 @@ function App() {
   return (
     <>
     <Layout/>
-    
     </>
     
   );
