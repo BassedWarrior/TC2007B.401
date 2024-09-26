@@ -22,9 +22,17 @@ import {
 import jsonServerProvider from 'ra-data-json-server';
 import {authProvider} from "./Login";
 
+// Spanish Translation provider.
+import { i18nProvider } from "./spanishProvider";
+
 const dataProvider = jsonServerProvider('https://localhost:5001/api');
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider} authProvider={authProvider}>
+  <Admin
+    layout={Layout}
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+    i18nProvider={i18nProvider}
+  >
     <Resource
       name="admins"
       list={ListGuesser}
