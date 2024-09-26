@@ -72,7 +72,7 @@ export const spanishMessages = {
                     'Suelte una imagen para cargarla o haga clic para seleccionarla.',
             },
             references: {
-                all_missing: 'No se pueden encontrar datos de referencias.',
+                all_missing: 'No se pueden encontrar datos de las referencias.',
                 many_missing:
                     'Al menos una de las referencias asociadas ya no está disponible.',
                 single_missing:
@@ -84,7 +84,7 @@ export const spanishMessages = {
             },
         },
         message: {
-            about: 'Acerca',
+            about: 'Acerca de',
             are_you_sure: '¿Estás seguro?',
             auth_error:
                 'Se ha producido un error al validar el token de autenticación.',
@@ -129,9 +129,9 @@ export const spanishMessages = {
             first: 'Ir a la primera página.',
             last: 'Ir a la última página.',
             next: 'Siguiente página.',
-            previous: 'Página pasada',
+            previous: 'Página anterior',
             page_rows_per_page: 'Filas por página:',
-            skip_nav: 'Saltar al conetenido',
+            skip_nav: 'Saltar al contenido',
         },
         sort: {
             sort_by: 'Ordenar por %{field} %{order}',
@@ -151,11 +151,11 @@ export const spanishMessages = {
             updated: 'Elemento actualizado |||| %{smart_count} elementos actualizados',
             created: 'Elemento creado',
             deleted: 'Elemento borrado |||| %{smart_count} elementos borrados',
-            bad_item: 'Elementos incorrecto',
-            item_doesnt_exist: 'Elementos no existe',
+            bad_item: 'Elemento incorrecto',
+            item_doesnt_exist: 'Elemento no existe',
             http_error: 'Error de comununicación con el servidor',
             data_provider_error:
-                'error dataProvider. Comprueba los detalles en la consola.',
+                'Error dataProvider. Comprueba los detalles en la consola.',
             i18n_error:
                 'No se pueden cargar las traducciones para el idioma especificado',
             canceled: 'Acción cancelada',
