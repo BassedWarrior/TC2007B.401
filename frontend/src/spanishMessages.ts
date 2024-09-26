@@ -1,6 +1,6 @@
 import { TranslationMessages } from 'ra-core';
 
-const SpanishMessages = {
+export const spanishMessages = {
     ra: {
         action: {
             add_filter: 'Agregar filtro',
@@ -214,5 +214,3 @@ const SpanishMessages = {
         },
     },
 };
-
-export default englishMessages;
