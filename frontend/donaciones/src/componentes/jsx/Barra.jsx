@@ -4,6 +4,7 @@ const Barra = () => {
   return (
     <div>
       <h1>BARRA GRANDE</h1>
+      
     </div>
   )
 }
