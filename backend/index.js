@@ -89,19 +89,23 @@ app.get('/api/admins', async (req,res) => {
   }
 });
 
-app.put('/api/admins/:id', async (req, res) => {
-    try {
-        const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedAdmin) return res.status(404).json({ error: 'Administrador no encontrado' });
-        res.json({
-            id: updatedAdmin._id,
-            usuario: updatedAdmin.usuario,
-            contrasena: updatedAdmin.contrasena
-        });
-    } catch (err) {
-        res.status(500).json({ error: 'Error al actualizar los datos del administrador' });
+app.get('/api/admins/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const admin = await Admin.findById(id);
+    if (!admin) {
+      return res.status(404).json({ error: 'Administrador no encontrado' });
     }
+    const adminWithId = {
+      id: admin._id,
+      usuario: admin.usuario,
+    };
+    res.json(adminWithId);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener el administrador' });
+  }
 });
+
 
 app.put('/api/admins/:id', async (req, res) => {
     try {
