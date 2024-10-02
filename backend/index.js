@@ -46,11 +46,11 @@ const DonacionSchema = new mongoose.Schema({
 const ProyectoSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   descripcion: { type: String, required: true },
-  inicio: { type: Date, required: true },
-  fin: { type: Date, required: true },
-  estado: { type: Boolean, required: true }, // True for active, ffalse forr finished or inactive
-  presupuesto: { type: Number, required: true },
-  objetivo: { type: String, required: true }
+  inicio: { type: Date, required: false },
+  fin: { type: Date, required: false },
+  estado: { type: String, enum: ['Planeado', 'En Progreso', 'Completado', 'Cancelado'], default: 'Planeado' }, // Planeado, En Progreso, Completado, Cancelado
+  presupuesto: { type: Number, required: false },
+  objetivo: { type: Number, required: false }
 })
 
 const Admin = mongoose.model('Admin', AdminSchema);
@@ -148,6 +148,25 @@ app.get('/api/donadores', async (req,res) => {
     res.status(500).json({ error: 'Error al obtener los donadores'});
   }
 });
+
+app.get('/api/donadores/:id', async (req, res) => {
+  const { id } = req.params; // Extract the id from the route parameters
+  try {
+    const donador = await Donador.findById(id); // Find the donador by ObjectId
+    if (!donador) {
+      return res.status(404).json({ error: 'Donador no encontrado' }); 
+    }
+    const donadorWithId = {
+      id: donador._id,
+      nombre: donador.nombre,
+      correo: donador.correo
+    };
+    res.json(donadorWithId);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener el donador' });
+  }
+});
+
 
 app.put('/api/donadores/:id', async (req, res) => {
     try {
