@@ -40,7 +40,7 @@ const DonacionSchema = new mongoose.Schema({
   tipo: { type: String, required: true },
   monto: { type: String, required: true },
   fecha: { type: Date, required: true },
-  correo: { type: String, required: true }
+  donador: { type: mongoose.Schema.Types.ObjectId, ref: 'Donador' } // Reference to donador
 });
 
 const ProyectoSchema = new mongoose.Schema({
@@ -51,7 +51,7 @@ const ProyectoSchema = new mongoose.Schema({
   estado: { type: String, enum: ['Planeado', 'En Progreso', 'Completado', 'Cancelado'], default: 'Planeado' }, // Planeado, En Progreso, Completado, Cancelado
   presupuesto: { type: Number, required: false },
   objetivo: { type: Number, required: false }
-})
+});
 
 const Admin = mongoose.model('Admin', AdminSchema);
 const Donador = mongoose.model('Donador', DonadorSchema);
@@ -205,8 +205,9 @@ app.get('/api/donaciones', async (req,res) => {
       tipo: donacion.tipo,
       monto: donacion.monto,
       fecha: donacion.fecha,
-      correo: donacion.correo
-
+      correo: donacion.correo,
+      donador: donacion.donador ? donacion.donador._id : null, // Referencia al id del donador
+      correo: donacion.donador ? donacion.donador.correo : null // Muestra el correo si existe el donador
     }));
     res.set('X-Total-Count', donaciones.length);
     res.json(donacionesWithId);
@@ -227,7 +228,9 @@ app.get('/api/donaciones/:id', async (req, res) => {
       tipo: donacion.tipo,
       monto: donacion.monto,
       fecha: donacion.fecha,
-      correo: donacion.correo
+      correo: donacion.correo,
+      donador: donacion.donador ? donacion.donador._id : null, // Referencia al id del donador
+      correo: donacion.donador ? donacion.donador.correo : null // Muestra el correo si existe el donador
     };
     res.json(donacionWithId);
   } catch (err) {
@@ -235,26 +238,27 @@ app.get('/api/donaciones/:id', async (req, res) => {
   }
 });
 
-
 app.post('/api/donaciones', async (req, res) => {
     try {
-        const newDonacion = new Donacion({ // Obtiene los datos de la respuesta
+        const newDonacion = new Donacion({
             tipo: req.body.tipo,
             monto: req.body.monto,
             fecha: req.body.fecha,
-            correo: req.body.correo
+            donador: req.body.donador  // Debe ser el ID del donador, no el correo
         });
-        const savedDonacion = await newDonacion.save(); // Guardar el nuevo post en la base de datos
+        const savedDonacion = await newDonacion.save();
         res.status(201).json({
+            id: savedDonacion._id,
             tipo: savedDonacion.tipo,
             monto: savedDonacion.monto,
             fecha: savedDonacion.fecha,
-            correo: savedDonacion.correo
+            donador: savedDonacion.donador  // Devolver el ID del donador
         });
     } catch (err) {
-        res.status(500).json({ error: 'Error al crear la donacion' }); // Responde con un error si algo falla
+        res.status(500).json({ error: 'Error al crear la donacion' });
     }
 });
+
 
 app.put('/api/donaciones/:id', async (req, res) => {
     try {
@@ -327,6 +331,32 @@ app.get('/api/proyectos', async (req, res) => {
         res.json(proyectosWithId);
     } catch (err) {
         res.status(500).json({ error: 'Error al obtener los proyectos' });
+    }
+});
+
+app.get('/api/proyectos/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const proyecto = await Proyecto.findById(id);
+        
+        if (!proyecto) {
+            return res.status(404).json({ error: 'Proyecto no encontrado' });
+        }
+
+        const proyectoConId = {
+            id: proyecto._id,
+            nombre: proyecto.nombre,
+            descripcion: proyecto.descripcion,
+            inicio: proyecto.inicio,
+            fin: proyecto.fin,
+            estado: proyecto.estado,
+            presupuesto: proyecto.presupuesto,
+            objetivo: proyecto.objetivo,
+        };
+
+        res.json(proyectoConId);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al buscar el proyecto' });
     }
 });
 
