@@ -48,7 +48,7 @@ const ProyectoSchema = new mongoose.Schema({
   descripcion: { type: String, required: true },
   inicio: { type: Date, required: false },
   fin: { type: Date, required: false },
-  estado: { type: String, enum: ['Planeado', 'En Progreso', 'Completado', 'Cancelado'], default: 'Planeado' }, // Planeado, En Progreso, Completado, Cancelado
+  estado: { type: String, enum: ['planeado', 'en progreso', 'completado', 'cancelado'], default: 'planeado', required: true }, // Planeado, En Progreso, Completado, Cancelado
   presupuesto: { type: Number, required: false },
   objetivo: { type: Number, required: false }
 });
