@@ -13,7 +13,7 @@ import {
     RadioButtonGroupInput,
     ReferenceField,
     ReferenceInput,
-    SelectInput
+    SelectInput,
 } from 'react-admin';
 
 export const DonacionesList = () => (
