@@ -1,22 +1,22 @@
 .NavBar {
-    background-color: #191F6D; /* Fondo azul */
+    background-color:#192459; /* Fondo azul */
     color: rgb(236, 36, 36);
-    padding: 10px;
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between; /* Alinea los elementos a los extremos */
 }
 
 .LogoSanders {
-    width: 50px;
-    height: 50px;
-    margin-right: 20px; /* Espacio entre la imagen y los botones */
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1rem; /* Espacio entre la imagen y los botones */
 }
 
 /* Botones generales */
 .boton {
     min-width: 130px;
-    height: 40px;
+    height: 3rem;
     color: #fff;
     padding: 5px 10px;
     font-weight: bold;
@@ -25,7 +25,7 @@
     position: relative;
     display: inline-block;
     outline: none;  
-    border-radius: 20px;
+    border-radius: 2rem;
     border: 2px solid #57cc99;
     background: #57cc99;
     margin-left: 15px; /* Espacio entre los botones */
