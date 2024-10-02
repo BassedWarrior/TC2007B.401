@@ -15,11 +15,10 @@ import {
   } from "@react-email/components";
   import * as React from "react";
   
-  
-  export const StackOverflowTipsEmail = () => (
+  export const CorreoDeAgradecimiento = () => (
     <Html>
       <Head />
-      <Preview>Stack overflow tips for searching</Preview>
+      <Preview>Gracias por tu donación</Preview>
       <Body style={main}>
         <Container style={container}>  
           <Section style={header}>
@@ -76,7 +75,7 @@ import {
   );
 
   
-  export default StackOverflowTipsEmail;
+  export default CorreoDeAgradecimiento;
   
   const main = {
     backgroundColor: "#f3f3f5",
