@@ -35,32 +35,17 @@ import {
   
           <Section style={content}>
             <Heading as="h2" style={title}>
-              Searching for solutions
+              Las contribuciones como la tuya son las que nos  permiten seguir ayudando...
             </Heading>
             <Text style={paragraph}>
-              With more than 18 million questions, it's possible that someone has
-              already provided a solution to the problem you're facing.{" "}
+              Actualmente, 12 millones de personas no cuentan con acceso a agua potable.
+              Es por esto que nuestra misión es llevar agua potable a todas las comunidades mediante sistemas de capacitación de agua pluvial y abasto de agua potable.
             </Text>
   
             <Hr style={divider} />
-            <Img src="https://sanders.com.mx/wp-content/uploads/2022/08/5.png" alt="Fundación Sanders"/>
-            <Heading as="h2" style={title}>
-              Use the search bar at the top of the page to find what you need
-            </Heading>
-            <Text style={paragraph}>
-              Here are a few simple search tips to get you started:
-            </Text>
-            <Text style={paragraph}>
-              The more information you can put in the search bar, the more likely
-              you will be to either find the answer you need or feel confident
-              that no one else has asked the question before.
-            </Text>
-  
+            <Img src="https://sanders.com.mx/wp-content/uploads/2022/08/5.png" alt="Fundación Sanders" style={imagen}/>
+
             <Hr style={divider} />
-  
-            <Heading as="h2" style={title}>
-              Take a break and read about the worst coder in the world
-            </Heading>
   
             <Section style={buttonContainer}>
               <Link style={button} href="https://sanders.com.mx/">
@@ -133,11 +118,13 @@ import {
   
   const buttonContainer = {
     marginTop: "24px",
-    display: "block",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   };
   
   const button = {
-    backgroundColor: "#0095ff",
+    backgroundColor: "#2b2d6e",
     border: "1px solid #0077cc",
     fontSize: "17px",
     lineHeight: "17px",
@@ -146,3 +133,10 @@ import {
     maxWidth: "120px",
     color: "#fff",
   };
+
+  const imagen = {
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "50%"
+  }
