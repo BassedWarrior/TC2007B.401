@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SandersLogo from '../../logos/SandersLogo.jpeg';
+import SandersLogo from '../../imagenes/NavBar/SandersLogo.jpeg';
 import './../css/Barra.css';
 
 const Barra = () => {
