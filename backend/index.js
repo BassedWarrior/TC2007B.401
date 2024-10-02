@@ -40,7 +40,7 @@ const DonacionSchema = new mongoose.Schema({
   tipo: { type: String, required: true },
   monto: { type: String, required: true },
   fecha: { type: Date, required: true },
-  donador: { type: String, required: true }
+  correo: { type: String, required: true }
 });
 
 const ProyectoSchema = new mongoose.Schema({
@@ -109,7 +109,7 @@ app.get('/api/admins/:id', async (req, res) => {
 
 app.put('/api/admins/:id', async (req, res) => {
     try {
-        const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedAdmin = await Admin.findByIdAgdUpdate(req.params.id, req.body, { new: true });
         if (!updatedAdmin) return res.status(404).json({ error: 'Administrador no encontrado' });
         res.json({
             id: updatedAdmin._id,
@@ -205,7 +205,7 @@ app.get('/api/donaciones', async (req,res) => {
       tipo: donacion.tipo,
       monto: donacion.monto,
       fecha: donacion.fecha,
-      donador: donacion.donador
+      correo: donacion.correo
 
     }));
     res.set('X-Total-Count', donaciones.length);
@@ -215,20 +215,41 @@ app.get('/api/donaciones', async (req,res) => {
   }
 });
 
+app.get('/api/donaciones/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const donacion = await Donacion.findById(id);
+    if (!donacion) {
+      return res.status(404).json({ error: 'Donación no encontrada' });
+    }
+    const donacionWithId = {
+      id: donacion._id,
+      tipo: donacion.tipo,
+      monto: donacion.monto,
+      fecha: donacion.fecha,
+      correo: donacion.correo
+    };
+    res.json(donacionWithId);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener la donación' });
+  }
+});
+
+
 app.post('/api/donaciones', async (req, res) => {
     try {
         const newDonacion = new Donacion({ // Obtiene los datos de la respuesta
             tipo: req.body.tipo,
             monto: req.body.monto,
             fecha: req.body.fecha,
-            donador: req.body.donador
+            correo: req.body.correo
         });
         const savedDonacion = await newDonacion.save(); // Guardar el nuevo post en la base de datos
         res.status(201).json({
             tipo: savedDonacion.tipo,
             monto: savedDonacion.monto,
             fecha: savedDonacion.fecha,
-            donador: savedDonacion.donador
+            correo: savedDonacion.correo
         });
     } catch (err) {
         res.status(500).json({ error: 'Error al crear la donacion' }); // Responde con un error si algo falla
@@ -244,7 +265,7 @@ app.put('/api/donaciones/:id', async (req, res) => {
             tipo: updatedDonacion.tipo,
             monto: updatedDonacion.monto,
             fecha: updatedDonacion.fecha,
-            donador: updatedDonacion.donador
+            correo: updatedDonacion.correo
         });
     } catch (err) {
         res.status(500).json({ error: 'Error al actualizar la donación' });
