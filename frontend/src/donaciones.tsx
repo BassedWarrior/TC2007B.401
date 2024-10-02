@@ -5,71 +5,79 @@ import {
     EditButton,
     SimpleForm,
     TextField,
-    TextInput,
     NumberField,
     NumberInput,
     DateField,
     DateInput,
     Create,
-    EmailField,
     RadioButtonGroupInput,
     ReferenceField,
-    ReferenceInput
+    ReferenceInput,
+    SelectInput
 } from 'react-admin';
 
-export const DonacionesList = () =>(
+export const DonacionesList = () => (
     <List>
         <Datagrid>
-            <TextField source = "tipo"/>
-            <NumberField source = "monto" options={{
+            <TextField source="tipo" />
+            <NumberField source="monto" options={{
                 style: 'currency',
                 currency: 'MXN'
             }} />
-            <DateField source = "fecha"/>
-            <ReferenceField source = "email" reference = "donadores"/>
+            <DateField source="fecha" />
+            <ReferenceField source="donador" reference="donadores">
+                <TextField source="correo" /> 
+            </ReferenceField>
             <EditButton />
         </Datagrid>
     </List>
 );
 
-export const DonacionesEdit = () =>(
+export const DonacionesEdit = () => (
     <Edit>
         <SimpleForm>
             <RadioButtonGroupInput source='tipo' choices={[
-                {id: 'especie', name: 'Especie'},
-                {id: 'monetaria', name: 'Monetaria'}
-            ]}/>
-            <NumberInput source ="monto" />
-            <DateInput source ="fecha"/>
-            <ReferenceInput source="email" reference="donadores"/>
+                { id: 'especie', name: 'Especie' },
+                { id: 'monetaria', name: 'Monetaria' }
+            ]} />
+            <NumberInput source="monto" />
+            <DateInput source="fecha" />
+            <ReferenceInput source="donador" reference="donadores">
+                <SelectInput optionText="correo" /> 
+            </ReferenceInput>
         </SimpleForm>
     </Edit>
 );
 
-export const DonacionesCreate = () =>(
+export const DonacionesCreate = () => (
     <Create>
         <SimpleForm>
-        <RadioButtonGroupInput source='Tipo' choices={[
-                {id: 'especie', name: 'Especie'},
-                {id: 'monetaria', name: 'Monetaria'}
-            ]}/>
-            <NumberInput source = "monto"/>
-            <DateInput source ="fecha"/>
-            <ReferenceInput source="email" reference="donadores"/>
+            <RadioButtonGroupInput source='tipo' choices={[
+                { id: 'especie', name: 'Especie' },
+                { id: 'monetaria', name: 'Monetaria' }
+            ]} />
+            <NumberInput source="monto" />
+            <DateInput source="fecha" />
+            <ReferenceInput source="donador" reference="donadores">
+                <SelectInput optionText="correo" /> 
+            </ReferenceInput>
         </SimpleForm>
     </Create>
 );
 
-export const DonacionesShow = () =>(
+export const DonacionesShow = () => (
     <List>
         <Datagrid>
-        <TextField source = "tipo"/>
-            <NumberField source = "monto" options={{
+            <TextField source="tipo" />
+            <NumberField source="monto" options={{
                 style: 'currency',
                 currency: 'MXN'
             }} />
-            <DateField source = "fecha"/>
-            <ReferenceField source = "email" reference = "donadores"/>
+            <DateField source="fecha" />
+            <ReferenceField source="donador" reference="donadores">
+                <TextField source="correo" /> 
+            </ReferenceField>
         </Datagrid>
     </List>
 );
+
