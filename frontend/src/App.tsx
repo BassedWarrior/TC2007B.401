@@ -37,20 +37,17 @@ export const App = () => (
       name="admins"
       list={ListGuesser}
       edit={EditGuesser}
-      show={ShowGuesser}
     />
     <Resource
       name="donadores"
       list={DonadoresList}
       edit={DonadoresEdit}
       create={DonadoresCreate}
-      show={DonadoresShow}
     />
     <Resource
       name="Proyectos"
       list={ProyectosList}
       edit={ProyectosEdit}
-      show={ProyectosShow}
       create={ProyectosCreate}
     />
     <Resource
@@ -58,7 +55,6 @@ export const App = () => (
       list={DonacionesList}
       edit={DonacionesEdit}
       create={DonacionesCreate}
-      show={DonacionesShow}
     />
   </Admin>
 );
