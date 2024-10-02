@@ -1,4 +1,5 @@
 import React from 'react'
+import Barra from '../../componentes/jsx/Barra'
 import { Link } from "react-router-dom";
 
 const Inicio = () => {
@@ -6,8 +7,6 @@ const Inicio = () => {
     <div>
       <nav>
         <h1>ESTAS EN EL INICIO</h1>
-        <Link to='/nosotros'></Link>
-        <Link to='/proyectos'></Link>
       </nav>
     </div>
   )
