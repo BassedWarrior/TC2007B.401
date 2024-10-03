@@ -5,15 +5,15 @@ export const graph =()=>(
   <Plot
     data={[
       {
-        x: [1, 2, 3],
+        x: ["enero", "febrero", "marzo"],
         y: [2, 6, 3],
         type: 'scatter',
         mode: 'lines+markers',
         marker: {color: 'red'},
       },
-      {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+      {type: 'bar', x: ["enero", "febrero", "marzo"], y: [2, 5, 3]},
       ]}
-    layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
+    layout={ {width: 320, height: 240, title: 'Ingresos Mensuales'} }
   />
 );
 
