@@ -109,7 +109,7 @@ app.get('/api/admins/:id', async (req, res) => {
 
 app.put('/api/admins/:id', async (req, res) => {
     try {
-        const updatedAdmin = await Admin.findByIdAgdUpdate(req.params.id, req.body, { new: true });
+        const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedAdmin) return res.status(404).json({ error: 'Administrador no encontrado' });
         res.json({
             id: updatedAdmin._id,
