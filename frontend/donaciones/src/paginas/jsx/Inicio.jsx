@@ -1,12 +1,16 @@
 import React from 'react'
+import "./../css/inicio.css"
 
 import Captacion from '../../imagenes/inicio/captacion.png'
 import Cisternas from '../../imagenes/inicio/cisternas.png'
 import CuidarAgua from '../../imagenes/inicio/cuidarAgua.jpg'
 
+
 const Inicio = () => {
   return (
-    <div>
+
+    
+    <div className='body'>
 
       <div className='PrimeraParte'>
         <img src = {Captacion} alt="Captacion Agua" className='Captacion'></img>

@@ -1,24 +1,24 @@
 .NavBar {
-    background-color:#192459; /* Fondo azul */
+    background-color: #192459;
     color: rgb(236, 36, 36);
     padding: 0.5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Alinea los elementos a los extremos */
+    justify-content: space-between;
 }
 
 .LogoSanders {
-    width: 5rem;
-    height: 5rem;
-    margin-right: 1rem; /* Espacio entre la imagen y los botones */
+    width: 4rem; 
+    height: 4rem;
+    margin-right: 1rem;
 }
 
 /* Botones generales */
 .boton {
-    min-width: 130px;
-    height: 3rem;
+    min-width: 7rem; 
+    height: 2.5rem;
     color: #fff;
-    padding: 5px 10px;
+    padding: 0.5rem 1rem; 
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -28,7 +28,7 @@
     border-radius: 2rem;
     border: 2px solid #57cc99;
     background: #57cc99;
-    margin-left: 15px; /* Espacio entre los botones */
+    margin-left: 0.5rem;
 }
 
 /* Hover para los botones generales */
@@ -39,19 +39,46 @@
 
 /* Estilo específico para el botón "DONAR AHORA" */
 .boton.donar {
-    background-color: #ff5722; /* Color distintivo para el botón DONAR AHORA */
-    border-color: #ff5722; /* Asegúrate de que el borde también sea del mismo color */
+    background-color: #ff5722;
+    border-color: #ff5722;
 }
 
 /* Hover para el botón "DONAR AHORA" */
 .boton.donar:hover {
-    background: #fff; /* Cambia el fondo al hacer hover */
-    color: #ff5722; /* Cambia el color del texto al hacer hover */
+    background: #fff;
+    color: #ff5722;
 }
 
-/* Estilo para centrar los botones (opcional, si deseas ajustarlos) */
+/* Flexbox para centrar los botones */
 .botones {
     display: flex;
-    justify-content: center; /* Centra los botones */
-    flex-grow: 1; /* Permite que ocupe el espacio restante */
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap; /* Permite que los botones se acomoden en nuevas líneas si es necesario */
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .NavBar {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .LogoSanders {
+        margin-bottom: 1rem;
+    }
+
+    .botones {
+        justify-content: center; 
+    }
+
+    .boton {
+        min-width: 100%; 
+        margin-left: 0;
+        margin-bottom: 0.5rem; 
+    }
+
+    .boton.donar {
+        margin-top: 0.5rem; 
+    }
 }

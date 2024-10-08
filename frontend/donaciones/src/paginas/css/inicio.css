@@ -1,0 +1,74 @@
+/* Estilos generales para cada sección con diferentes colores de fondo */
+.PrimeraParte {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #DDE7F2; /* Color de fondo para la primera parte */
+    color: #192459;
+}
+
+.SegundaParte {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #C3D3E5; /* Color de fondo para la segunda parte */
+    color: #192459;
+    flex-direction: row-reverse; /* Imagen a la derecha */
+}
+
+.TerceraParte {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #A8BED7; /* Color de fondo para la tercera parte */
+    color: #192459;
+}
+
+/* Estilos de las imágenes con borde negro */
+.Captacion, .Cisterna, .CuidarAgua {
+    flex: 1;
+    max-width: 50%;
+    height: auto;
+    border: 5px solid #192459; /* Marco negro para las imágenes */
+}
+
+/* Estilos del texto en cada sección */
+.Creemos, .ComoHacemos, .PorQue {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Ajustar el tamaño y estilo del texto */
+h2 {
+    font-size:4rem;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 2rem;
+    line-height: 1.5;
+}
+
+/* Diseño responsivo para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .PrimeraParte, .SegundaParte, .TerceraParte {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .Captacion, .Cisterna, .CuidarAgua {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .SegundaParte {
+        flex-direction: column; /* Revertimos a diseño vertical en pantallas pequeñas */
+    }
+}
