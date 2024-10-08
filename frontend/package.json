@@ -9,12 +9,17 @@
     "format": "prettier --write ./src"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.7",
+    "@mui/styled-engine-sc": "^6.1.2",
     "plotly.js": "^2.35.2",
     "ra-data-json-server": "^5.1.0",
     "react": "^18.3.0",
     "react-admin": "^5.1.0",
     "react-dom": "^18.3.0",
-    "react-plotly.js": "^2.6.0"
+    "react-plotly.js": "^2.6.0",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@types/node": "^20.10.7",
