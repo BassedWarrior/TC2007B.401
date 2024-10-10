@@ -40,18 +40,18 @@ const DonacionSchema = new mongoose.Schema({
   tipo: { type: String, required: true },
   monto: { type: String, required: true },
   fecha: { type: Date, required: true },
-  donador: { type: String, required: true }
+  donador: { type: mongoose.Schema.Types.ObjectId, ref: 'Donador' } // Reference to donador
 });
 
 const ProyectoSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   descripcion: { type: String, required: true },
-  inicio: { type: Date, required: true },
-  fin: { type: Date, required: true },
-  estado: { type: Boolean, required: true }, // True for active, ffalse forr finished or inactive
-  presupuesto: { type: Number, required: true },
-  objetivo: { type: String, required: true }
-})
+  inicio: { type: Date, required: false },
+  fin: { type: Date, required: false },
+  estado: { type: String, enum: ['planeado', 'en progreso', 'completado', 'cancelado'], default: 'planeado', required: true }, // Planeado, En Progreso, Completado, Cancelado
+  presupuesto: { type: Number, required: false },
+  objetivo: { type: Number, required: false }
+});
 
 const Admin = mongoose.model('Admin', AdminSchema);
 const Donador = mongoose.model('Donador', DonadorSchema);
@@ -89,19 +89,23 @@ app.get('/api/admins', async (req,res) => {
   }
 });
 
-app.put('/api/admins/:id', async (req, res) => {
-    try {
-        const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedAdmin) return res.status(404).json({ error: 'Administrador no encontrado' });
-        res.json({
-            id: updatedAdmin._id,
-            usuario: updatedAdmin.usuario,
-            contrasena: updatedAdmin.contrasena
-        });
-    } catch (err) {
-        res.status(500).json({ error: 'Error al actualizar los datos del administrador' });
+app.get('/api/admins/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const admin = await Admin.findById(id);
+    if (!admin) {
+      return res.status(404).json({ error: 'Administrador no encontrado' });
     }
+    const adminWithId = {
+      id: admin._id,
+      usuario: admin.usuario,
+    };
+    res.json(adminWithId);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener el administrador' });
+  }
 });
+
 
 app.put('/api/admins/:id', async (req, res) => {
     try {
@@ -149,6 +153,25 @@ app.get('/api/donadores', async (req,res) => {
   }
 });
 
+app.get('/api/donadores/:id', async (req, res) => {
+  const { id } = req.params; // Extract the id from the route parameters
+  try {
+    const donador = await Donador.findById(id); // Find the donador by ObjectId
+    if (!donador) {
+      return res.status(404).json({ error: 'Donador no encontrado' }); 
+    }
+    const donadorWithId = {
+      id: donador._id,
+      nombre: donador.nombre,
+      correo: donador.correo
+    };
+    res.json(donadorWithId);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener el donador' });
+  }
+});
+
+
 app.put('/api/donadores/:id', async (req, res) => {
     try {
         const updatedDonador = await Donador.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -182,8 +205,9 @@ app.get('/api/donaciones', async (req,res) => {
       tipo: donacion.tipo,
       monto: donacion.monto,
       fecha: donacion.fecha,
-      donador: donacion.donador
-
+      correo: donacion.correo,
+      donador: donacion.donador ? donacion.donador._id : null, // Referencia al id del donador
+      correo: donacion.donador ? donacion.donador.correo : null // Muestra el correo si existe el donador
     }));
     res.set('X-Total-Count', donaciones.length);
     res.json(donacionesWithId);
@@ -192,25 +216,49 @@ app.get('/api/donaciones', async (req,res) => {
   }
 });
 
+app.get('/api/donaciones/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const donacion = await Donacion.findById(id);
+    if (!donacion) {
+      return res.status(404).json({ error: 'Donación no encontrada' });
+    }
+    const donacionWithId = {
+      id: donacion._id,
+      tipo: donacion.tipo,
+      monto: donacion.monto,
+      fecha: donacion.fecha,
+      correo: donacion.correo,
+      donador: donacion.donador ? donacion.donador._id : null, // Referencia al id del donador
+      correo: donacion.donador ? donacion.donador.correo : null // Muestra el correo si existe el donador
+    };
+    res.json(donacionWithId);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener la donación' });
+  }
+});
+
 app.post('/api/donaciones', async (req, res) => {
     try {
-        const newDonacion = new Donacion({ // Obtiene los datos de la respuesta
+        const newDonacion = new Donacion({
             tipo: req.body.tipo,
             monto: req.body.monto,
             fecha: req.body.fecha,
-            donador: req.body.donador
+            donador: req.body.donador  // Debe ser el ID del donador, no el correo
         });
-        const savedDonacion = await newDonacion.save(); // Guardar el nuevo post en la base de datos
+        const savedDonacion = await newDonacion.save();
         res.status(201).json({
+            id: savedDonacion._id,
             tipo: savedDonacion.tipo,
             monto: savedDonacion.monto,
             fecha: savedDonacion.fecha,
-            donador: savedDonacion.donador
+            donador: savedDonacion.donador  // Devolver el ID del donador
         });
     } catch (err) {
-        res.status(500).json({ error: 'Error al crear la donacion' }); // Responde con un error si algo falla
+        res.status(500).json({ error: 'Error al crear la donacion' });
     }
 });
+
 
 app.put('/api/donaciones/:id', async (req, res) => {
     try {
@@ -221,7 +269,7 @@ app.put('/api/donaciones/:id', async (req, res) => {
             tipo: updatedDonacion.tipo,
             monto: updatedDonacion.monto,
             fecha: updatedDonacion.fecha,
-            donador: updatedDonacion.donador
+            correo: updatedDonacion.correo
         });
     } catch (err) {
         res.status(500).json({ error: 'Error al actualizar la donación' });
@@ -283,6 +331,32 @@ app.get('/api/proyectos', async (req, res) => {
         res.json(proyectosWithId);
     } catch (err) {
         res.status(500).json({ error: 'Error al obtener los proyectos' });
+    }
+});
+
+app.get('/api/proyectos/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const proyecto = await Proyecto.findById(id);
+        
+        if (!proyecto) {
+            return res.status(404).json({ error: 'Proyecto no encontrado' });
+        }
+
+        const proyectoConId = {
+            id: proyecto._id,
+            nombre: proyecto.nombre,
+            descripcion: proyecto.descripcion,
+            inicio: proyecto.inicio,
+            fin: proyecto.fin,
+            estado: proyecto.estado,
+            presupuesto: proyecto.presupuesto,
+            objetivo: proyecto.objetivo,
+        };
+
+        res.json(proyectoConId);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al buscar el proyecto' });
     }
 });
 
