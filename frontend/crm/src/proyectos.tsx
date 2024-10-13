@@ -90,7 +90,7 @@ export const ProyectosShow = () => (
 );
 
 export const ProyectosCreate = () => (
-    <Create>
+    <Create redirect='/proyectos'>
         <SimpleForm>
             <TextInput source="nombre" validate={[required()]} />
             <TextInput source="descripcion" validate={[required()]} />
