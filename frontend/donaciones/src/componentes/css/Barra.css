@@ -26,27 +26,26 @@
     display: inline-block;
     outline: none;  
     border-radius: 2rem;
-    border: 2px solid #57cc99;
-    background: #57cc99;
+    border: 2px solid #00A3B5;
+    background: #00A3B5;
     margin-left: 0.5rem;
 }
 
 /* Hover para los botones generales */
 .boton:hover {
     background: #fff;
-    color: #57cc99;
+    color: #00A3B5;
 }
 
-/* Estilo específico para el botón "DONAR AHORA" */
 .boton.donar {
-    background-color: #ff5722;
-    border-color: #ff5722;
+    background-color: #F44A7E;
+    border-color: #F44A7E;
 }
 
 /* Hover para el botón "DONAR AHORA" */
 .boton.donar:hover {
     background: #fff;
-    color: #ff5722;
+    color: #F44A7E;
 }
 
 /* Flexbox para centrar los botones */
