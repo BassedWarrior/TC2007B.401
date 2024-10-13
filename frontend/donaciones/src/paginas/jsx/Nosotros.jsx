@@ -3,10 +3,38 @@ import React from 'react'
 import "../css/Nosotros.css"
 
 import Guillermo from '../../imagenes/Nosotros/GuillermoSandersAcedo.png'
+import Agua from '../../imagenes/Nosotros/llevamosAgua.png'
 
 const Nosotros = () => {
   return (
     <div className="Nosotros">
+
+
+
+      <div className='Parrafos'>
+        <div className='Objetivo'>
+          <h2>Objetivo</h2>
+          <p>Desarrollar proyectos para contribuir a enfrentar los rezagos sociales en materia de salud sexual y reproductiva, nutrición comunitaria y abasto de agua.</p>
+        </div>
+
+        <div className='Mision'>
+          <h2>Misión</h2>
+          <p>Fomentar la salud sexual y reproductiva, la sana alimentación y el abasto de agua potable entre grupos más vulnerables de la sociedad, para prevenir y incidencia y prevalencia de embarazos no planificados, infecciones de transmisión sexual, así como padecimientos asociados a la malnutrición y al consumo de agua contaminada.</p>
+        </div>
+
+        <div className='Vision'>
+          <h2>Visión</h2>
+          <p>Fundación Sanders A.C. es un referente por su modelo de intervención preventiva para fomentar la salud sexual y reproductiva, la sana alimentación y el abasto de agua potable en grupos sociales en situación de vulnerabilidad, contribuyendo de esa manera a la construcción de condiciones de justicia social en México.</p>
+        </div>
+      </div>
+
+
+      <div className='Agua'>
+        <img src={Agua} alt="imagenLlevamos" className='llevamosAgua'></img>
+      </div>
+
+
+
       <div className='Guillermo'>
         <div className="imagenContenedor">
           <img src={Guillermo} alt='FotoGuillermo' className='Retrato'></img>
@@ -27,22 +55,7 @@ const Nosotros = () => {
         </div>
       </div>
 
-      <div className='Parrafos'>
-        <div className='Objetivo'>
-          <h2>Objetivo</h2>
-          <p>Desarrollar proyectos para contribuir a enfrentar los rezagos sociales en materia de salud sexual y reproductiva, nutrición comunitaria y abasto de agua.</p>
-        </div>
 
-        <div className='Mision'>
-          <h2>Misión</h2>
-          <p>Fomentar la salud sexual y reproductiva, la sana alimentación y el abasto de agua potable entre grupos más vulnerables de la sociedad, para prevenir y incidencia y prevalencia de embarazos no planificados, infecciones de transmisión sexual, así como padecimientos asociados a la malnutrición y al consumo de agua contaminada.</p>
-        </div>
-
-        <div className='Vision'>
-          <h2>Visión</h2>
-          <p>Fundación Sanders A.C. es un referente por su modelo de intervención preventiva para fomentar la salud sexual y reproductiva, la sana alimentación y el abasto de agua potable en grupos sociales en situación de vulnerabilidad, contribuyendo de esa manera a la construcción de condiciones de justicia social en México.</p>
-        </div>
-      </div>
     </div>
   )
 }

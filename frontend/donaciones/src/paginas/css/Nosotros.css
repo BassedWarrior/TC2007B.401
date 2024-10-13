@@ -1,43 +1,45 @@
-.Nosotros {
-    background-color: #f0f4f8; /* Fondo claro neutro */
-}
+
 
 .Guillermo {
     display: flex;
-    justify-content: center;
+    flex-direction: column; 
+    align-items: center;
     width: 100%; 
     padding: 2rem;
-    background-color: #2e3b55; /* Azul oscuro para contrastar */
-}
+    background-color: #BECED2;}
 
 .imagenContenedor {
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 2rem;
+
 }
 
 .Retrato {
-    width: 70%;
-    padding: 1rem;
-    height: auto;
+    width: 100%; 
+    max-width: 500px; 
+    height: auto; 
+    object-fit: cover; 
     box-sizing: border-box;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 10px 10px black;
 }
 
 .fundacion {
-    width: 90%;
-    padding: 2rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
+    padding-top: 1.5rem;
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    
 }
-
 .primero, .segundo {
-    margin-bottom: 1.5rem; 
-    line-height: 1.8rem; 
-    color: #1f2933; /* Texto en gris oscuro */
+    width: 48%; 
+    margin-bottom: 1.5rem;
+    line-height: 1.8rem;
+    color: #1f2933; 
+    font-size: 2rem;
+    text-align: center;
+    
 }
 
 .Parrafos {
@@ -46,26 +48,88 @@
     width: 100%;
     padding: 2rem;
     box-sizing: border-box;
-    background-color: #406080; /* Azul intermedio */
+    background-color: #BECED2;
+    flex-wrap: wrap; 
 }
 
 .Objetivo, .Mision, .Vision {
-    width: 32%;
+    width: calc(33% - 1rem);
     padding: 1.5rem;
-    background-color: #31475f; /* Fondo muy claro para contraste */
+    background-color: #654D5E;
     border-radius: 8px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     box-sizing: border-box;
+    margin: 0.5rem;
+    font-size: 1.1rem; }
+
+.Agua {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #BECED2; }
+
+
+.llevamosAgua {
+    max-width: 100%;
+    height: auto;
 }
 
-.Objetivo h2, .Mision h2, .Vision h2 {
-    margin-bottom: 2rem;
-    color: #162c49; /* Azul más oscuro */
+
+
+@media (max-width:768px){
+    .Agua {
+        display: none; 
+    }
 }
 
-.Objetivo p, .Mision p, .Vision p {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-    color: #1f2933; /* Gris oscuro */
+@media (max-width: 768px) {
+    .Guillermo {
+        flex-direction: column;
+    }
+    .Parrafos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Objetivo, .Mision, .Vision {
+        width: 90%;
+    }
+
+    .Retrato {
+        max-width: 90%; 
+    }
+
+    .fundacion {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .primero, .segundo {
+        width: 100%; 
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .fundacion {
+        width: 100%; 
+        padding: 1rem;
+    }
+
+    .Retrato {
+        width: 100%;
+    }
+
+    .Parrafos {
+        padding: 1rem;
+    }
+
+    .Objetivo, .Mision, .Vision {
+        padding: 1rem;
+    }
+
+    .primero, .segundo {
+        font-size: 0.9rem;
+    }
 }
