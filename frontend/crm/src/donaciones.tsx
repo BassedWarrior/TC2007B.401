@@ -50,7 +50,7 @@ export const DonacionesEdit = () => (
 );
 
 export const DonacionesCreate = () => (
-    <Create>
+    <Create redirect='/donaciones'>
         <SimpleForm>
             <RadioButtonGroupInput source='tipo' choices={[
                 { id: 'especie', name: 'Especie' },

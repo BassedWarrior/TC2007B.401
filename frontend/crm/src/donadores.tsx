@@ -31,7 +31,7 @@ export const DonadoresEdit = () =>(
 );
 
 export const DonadoresCreate = () =>(
-    <Create>
+    <Create redirect='/donadores'>
         <SimpleForm>
             <TextInput source = "nombre"/>
             <TextInput source = "correo"/>

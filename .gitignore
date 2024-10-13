@@ -1,6 +1,6 @@
 node_modules
-.env
-.crt
-.key
-.srl
-.csr
+*.env
+*.crt
+*.key
+*.srl
+*.csr
