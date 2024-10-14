@@ -38,7 +38,6 @@ const AdminSchema = new mongoose.Schema(
     contrasena: { type: String, required: true },
     correo: { type: String, required: true },
     nombre: { type: String, required: true },
-    apellido: { type: String, required: true },
     rol: { type: String, required: true, enum: ["administrador", "empleado"] },
   },
   { strict: true },
@@ -50,6 +49,7 @@ const DonadorSchema = new mongoose.Schema(
     correo: {
       type: String,
       required: true,
+      // check for valid email formats through characters
       match: [/.+@.+\..+/, "Invalid email format"],
     },
   },
@@ -92,30 +92,15 @@ const Proyecto = mongoose.model("Proyecto", ProyectoSchema);
 // Función para sanitizar entrada
 const sanitizeInput = (input) => mongoSanitize(input);
 
-app.post("/api/admins", async (req, res) => {
-  try {
-    const sanitizedBody = sanitizeInput(req.body);
-    const newAdmin = new Admin({
-      usuario: sanitizedBody.usuario,
-      contrasena: sanitizedBody.contrasena,
-    });
-    const savedAdmin = await newAdmin.save();
-    res.status(201).json({
-      id: savedAdmin._id,
-      usuario: savedAdmin.usuario,
-      contrasena: savedAdmin.contrasena,
-    });
-  } catch (err) {
-    res.status(500).json({ error: "Error al crear el administrador" });
-  }
-});
-
 app.get("/api/admins", async (req, res) => {
   try {
     const admins = await Admin.find();
     const adminsWithId = admins.map((admin) => ({
       id: admin._id,
       usuario: admin.usuario,
+      correo: admin.correo,
+      nombre: admin.nombre,
+      rol: admin.rol,
     }));
     res.set("X-Total-Count", admins.length);
     res.json(adminsWithId);
@@ -134,6 +119,9 @@ app.get("/api/admins/:id", async (req, res) => {
     const adminWithId = {
       id: admin._id,
       usuario: admin.usuario,
+      correo: admin.correo,
+      nombre: admin.nombre,
+      rol: admin.rol,
     };
     res.json(adminWithId);
   } catch (err) {
@@ -144,6 +132,12 @@ app.get("/api/admins/:id", async (req, res) => {
 app.put("/api/admins/:id", async (req, res) => {
   try {
     const sanitizedBody = sanitizeInput(req.body);
+
+    if (sanitizedBody.contrasena) {
+      const hashedPassword = await bcrypt.hash(sanitizedBody.contrasena, 10);
+      sanitizedBody.contrasena = hashedPassword;
+    }
+
     const updatedAdmin = await Admin.findByIdAndUpdate(
       req.params.id,
       sanitizedBody,
@@ -152,9 +146,12 @@ app.put("/api/admins/:id", async (req, res) => {
     if (!updatedAdmin)
       return res.status(404).json({ error: "Administrador no encontrado" });
     res.json({
-      id: updatedAdmin._id,
-      usuario: updatedAdmin.usuario,
-      contrasena: updatedAdmin.contrasena,
+      id: admin._id,
+      usuario: admin.usuario,
+      contrasena: admin.contrasena,
+      correo: admin.correo,
+      nombre: admin.nombre,
+      rol: admin.rol,
     });
   } catch (err) {
     res
