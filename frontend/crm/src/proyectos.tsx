@@ -48,8 +48,8 @@ export const ProyectosList = () => (
 export const ProyectosEdit = () => (
     <Edit>
         <SimpleForm>
-            <TextInput source="nombre" />
-            <TextInput source="descripcion" />
+            <TextInput source="nombre" validate={[required()]} />
+            <TextInput source="descripcion" validate={[required()]} />
             <DateInput source="inicio" />
             <DateInput source="fin" />
             <RadioButtonGroupInput source="estado" choices={[
@@ -57,7 +57,7 @@ export const ProyectosEdit = () => (
                 { id: "en progreso", name: "En Progreso" },
                 { id: "completado", name: "Completado" },
                 { id: "cancelado", name: "Cancelado" },
-            ]} />
+            ]} validate={[required()]} />
             <NumberInput source="presupuesto" />
             <NumberInput source="objetivo" />
         </SimpleForm>
@@ -90,7 +90,7 @@ export const ProyectosShow = () => (
 );
 
 export const ProyectosCreate = () => (
-    <Create>
+    <Create redirect='/proyectos'>
         <SimpleForm>
             <TextInput source="nombre" validate={[required()]} />
             <TextInput source="descripcion" validate={[required()]} />

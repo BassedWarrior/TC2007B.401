@@ -14,6 +14,7 @@ import {
     ReferenceField,
     ReferenceInput,
     SelectInput,
+    required,
 } from 'react-admin';
 
 export const DonacionesList = () => (
@@ -39,9 +40,9 @@ export const DonacionesEdit = () => (
             <RadioButtonGroupInput source='tipo' choices={[
                 { id: 'especie', name: 'Especie' },
                 { id: 'monetaria', name: 'Monetaria' }
-            ]} />
-            <NumberInput source="monto" />
-            <DateInput source="fecha" />
+            ]} validate={[required()]} />
+            <NumberInput source="monto" validate={[required()]} />
+            <DateInput source="fecha" validate={[required()]} />
             <ReferenceInput source="donador" reference="donadores">
                 <SelectInput optionText="correo" /> 
             </ReferenceInput>
@@ -50,14 +51,14 @@ export const DonacionesEdit = () => (
 );
 
 export const DonacionesCreate = () => (
-    <Create>
+    <Create redirect='/donaciones'>
         <SimpleForm>
             <RadioButtonGroupInput source='tipo' choices={[
                 { id: 'especie', name: 'Especie' },
                 { id: 'monetaria', name: 'Monetaria' }
-            ]} />
-            <NumberInput source="monto" />
-            <DateInput source="fecha" />
+            ]} validate={[required()]} />
+            <NumberInput source="monto" validate={[required()]} />
+            <DateInput source="fecha" validate={[required()]} />
             <ReferenceInput source="donador" reference="donadores">
                 <SelectInput optionText="correo" /> 
             </ReferenceInput>
