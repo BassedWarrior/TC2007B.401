@@ -1,0 +1,50 @@
+.PieAbajo {
+    background-color: #282c34; 
+    color: white; 
+    padding: 20px; 
+    text-align: center; 
+    font-family: Arial, sans-serif; 
+    position: relative; 
+  }
+  
+  .Direccion, .Telefono, .Correo {
+    margin: 10px 0; 
+  }
+  
+  p {
+    margin: 0; 
+  }
+  
+  /* Estilo para dispositivos móviles */
+  @media (max-width: 600px) {
+    .PieAbajo {
+      padding: 15px;
+      font-size: 14px; 
+    }
+  }
+  
+  /* Efecto hover para interactividad */
+  .PieAbajo p:hover {
+    color: #61dafb; 
+    transition: color 0.3s; 
+  }
+  
+  
+  .PieAbajo::after {
+    content: '';
+    display: block;
+    width: 80%; 
+    height: 2px;
+    background: #61dafb;
+    margin: 10px auto; 
+  }
+  
+
+  .CorreoLink {
+    color: #61dafb; 
+    text-decoration: none; 
+  }
+  
+  .CorreoLink:hover {
+    text-decoration: underline; 
+  }
