@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
     "@emotion/react": "^11.13.3",
@@ -21,14 +20,6 @@
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "swr": "^2.2.5",
-=======
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
->>>>>>> main
     "web-vitals": "^2.1.4"
   },
   "scripts": {
