@@ -1,5 +1,5 @@
 import React from 'react'
-import "./../css/Inicio.css"
+import "./../css/inicio.css"
 
 import Captacion from '../../imagenes/inicio/captacion.png'
 import Cisternas from '../../imagenes/inicio/cisternas.png'

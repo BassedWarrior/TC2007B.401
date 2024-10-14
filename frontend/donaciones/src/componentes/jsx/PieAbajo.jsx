@@ -3,7 +3,6 @@ import React from 'react';
 import "../css/PieAbajo.css"
 
 const PieAbajo = () => {
-    console.log("PieAbajo renderizado");
   return (
     <div className='PieAbajo'>
 

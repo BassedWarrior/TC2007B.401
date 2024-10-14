@@ -34,8 +34,8 @@ const Donaciones = () => {
                 <input type='email' {...register("correo", { required: true })} />
                 {errors.correo && <span>Correo electrónico es requerido</span>}
 
-                <label htmlFor='cantidad'>Monto a donar: </label>
-                <input type='number' {...register("cantidad")} />
+                <label htmlFor='monto'>Monto a donar: </label>
+                <input type='number' {...register("monto",{required:true, min:1})} />
 
                 <div className="checkbox-container">
                     <input type='checkbox' id='terminos' {...register("terminos", { required: true })} />

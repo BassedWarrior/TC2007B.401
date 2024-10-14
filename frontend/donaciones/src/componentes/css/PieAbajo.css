@@ -11,9 +11,10 @@
     margin: 10px 0; 
   }
   
-  p {
-    margin: 0; 
-  }
+p {
+  margin: 0; 
+  font-size: 0.5rem;
+}
   
   /* Estilo para dispositivos móviles */
   @media (max-width: 600px) {
