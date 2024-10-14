@@ -12,7 +12,9 @@ const adminRoutes = require("./routes/adminRoutes");
 const donadorRoutes = require("./routes/donadorRoutes");
 const donacionRoutes = require("./routes/donacionRoutes");
 const proyectoRoutes = require("./routes/proyectoRoutes");
-// Esquema de administrador para inicio de sesión y registro.
+// Rutas de endpoints para el inicio de sesión
+const loginRoutes = require("./routes/loginRoutes");
+// Esquema de administrador para registro.
 const Admin = require("./models/Admin");
 
 const app = express();
@@ -40,6 +42,8 @@ app.use("/api/donadores", donadorRoutes);
 app.use("/api/donaciones", donacionRoutes);
 app.use("/api/proyectos", proyectoRoutes);
 
+// Utilizar rutas de endpoints para inicio de sesión
+app.use("/api/login", loginRoutes);
 
 // Registrar un nuevo usuario
 app.post('/api/registro',  async (req, res) => {
@@ -55,27 +59,6 @@ app.post('/api/registro',  async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: 'Error al registrar el usuario' });
-    }
-});
-
-// Autenticar a un usuario
-app.post('/api/login', async (req, res) => {
-    try {  
-        const { usuario, contrasena } = req.body;
-        const user = await Admin.findOne({ usuario });
-        if(!user){
-          return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
-        }
-        const isMatch = await bcrypt.compare(contrasena, user.contrasena);
-        if (!isMatch) {
-            return res.status(401).json({ error: 'Usuario o Contraseña Incorrectos' });
-        }
-        const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token});
-        console.log(process.env.JWT_SECRET); 
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ error: 'Error al iniciar sesión' });
     }
 });
 
