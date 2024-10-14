@@ -450,10 +450,22 @@ app.delete("/api/proyectos/:id", async (req, res) => {
 app.post("/api/registro", async (req, res) => {
   try {
     const sanitizedBody = sanitizeInput(req.body);
-    const { usuario, contrasena } = sanitizedBody;
+    const { usuario, contrasena, correo, nombre, apellido, rol } =
+      sanitizedBody;
+
     const Hashcontrasena = await bcrypt.hash(contrasena, 10);
-    const newAdmin = new Admin({ usuario, contrasena: Hashcontrasena });
+
+    const newAdmin = new Admin({
+      usuario,
+      contrasena: Hashcontrasena,
+      correo,
+      nombre,
+      apellido,
+      rol,
+    });
+
     await newAdmin.save();
+
     res.status(201).json({ message: "Usuario registrado con éxito" });
     console.log("Administrador registrado con éxito");
     console.log("Usuario: ", usuario);
