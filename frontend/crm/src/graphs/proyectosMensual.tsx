@@ -1,7 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-export const TipoDonacion =()=>(
+export const ProyectosMensual =()=>(
   <Plot
     data={[{
         type: 'pie', 
