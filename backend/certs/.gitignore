@@ -1,0 +1,8 @@
+# Ignore all certificate files in the `certs` directory
+# This file is meant to ignore all certificate files, while still providing a
+# file to be tracked in order to signalize the proper path for the `certs`
+# directory.
+*.crt
+*.csr
+*.key
+*.srl

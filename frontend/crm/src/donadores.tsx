@@ -24,17 +24,17 @@ export const DonadoresList = () =>(
 export const DonadoresEdit = () =>(
     <Edit>
         <SimpleForm>
-            <TextInput source ="nombre"/>
-            <TextInput source="correo"/>
+            <TextInput source ="nombre" validate={[required()]} />
+            <TextInput source="correo" validate={[required()]} />
         </SimpleForm>
     </Edit>
 );
 
 export const DonadoresCreate = () =>(
-    <Create>
+    <Create redirect='/donadores'>
         <SimpleForm>
-            <TextInput source = "nombre"/>
-            <TextInput source = "correo"/>
+            <TextInput source="nombre" validate={[required()]} />
+            <TextInput source="correo" validate={[required()]} />
         </SimpleForm>
     </Create>
 );
