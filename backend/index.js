@@ -26,37 +26,11 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use(express.json());
 
-const AdminSchema = new mongoose.Schema({
-  usuario: { type: String, required: true },
-  contrasena: { type: String, required: true }
-});
-
-const DonadorSchema = new mongoose.Schema({
-  nombre: { type: String, required: true },
-  correo: {type: String, required: true }
-});
-
-const DonacionSchema = new mongoose.Schema({
-  tipo: { type: String, required: true },
-  monto: { type: String, required: true },
-  fecha: { type: Date, required: true },
-  donador: { type: mongoose.Schema.Types.ObjectId, ref: 'Donador' } // Reference to donador
-});
-
-const ProyectoSchema = new mongoose.Schema({
-  nombre: { type: String, required: true },
-  descripcion: { type: String, required: true },
-  inicio: { type: Date, required: false },
-  fin: { type: Date, required: false },
-  estado: { type: String, enum: ['planeado', 'en progreso', 'completado', 'cancelado'], default: 'planeado', required: true }, // Planeado, En Progreso, Completado, Cancelado
-  presupuesto: { type: Number, required: false },
-  objetivo: { type: Number, required: false }
-});
-
-const Admin = mongoose.model('Admin', AdminSchema);
-const Donador = mongoose.model('Donador', DonadorSchema);
-const Donacion = mongoose.model('Donacion', DonacionSchema);
-const Proyecto = mongoose.model('Proyecto', ProyectoSchema);
+// Esquemas de la base de datos definidos en sus propios archivos.
+const Admin = require("./models/Admin");
+const Donador = require("./models/Donador");
+const Donacion = require("./models/Donacion");
+const Proyecto = require("./models/Proyecto");
 
 app.post('/api/admins', async (req, res) => {
     try {
