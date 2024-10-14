@@ -4,7 +4,6 @@ const mongoSanitize = require("mongo-sanitize"); // Agregamos mongo-sanitize
 require("dotenv").config();
 const cors = require("cors");
 const bcrypt = require("bcryptjs");  // Utilizada para el encriptado de las contraseñas.
-const jwt = require("jsonwebtoken");  // Utilizado para mantener la sesión iniciada.
 const fs = require("fs");  // Required to access the filesystem.
 const https = require("https");  // Required to access the HTTPS protocol.
 // Rutas de endpoints de los recursos definidos en sus propios archivos.
@@ -17,6 +16,8 @@ const proyectoRoutes = require("./routes/proyectoRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 // Esquema de administrador para registro.
 const Admin = require("./models/Admin");
+
+const auth = require("./middlewares/auth");  // Utilizado para autenticación.
 
 const app = express();
 const PORT = process.env.PORT || 5000;
