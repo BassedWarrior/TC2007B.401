@@ -20,7 +20,7 @@ const Barra = () => {
   };
 
   const handleDonar = () => {
-    navigate('/donar');
+    navigate('/donaciones');
   };
 
   return (
@@ -33,7 +33,7 @@ const Barra = () => {
         <button className='boton' onClick={handleProyectos}>PROYECTOS</button>
       </div>
 
-      <button className='boton donar' onClick={handleDonar}>DONAR AHORA</button> {/* Botón DONAR AHORA a la derecha */}
+      <button className='boton donar' onClick={handleDonar}>DONAR AHORA</button>
     </div>
   );
 };

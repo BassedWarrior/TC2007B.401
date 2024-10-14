@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  /* Estilos generales del cuerpo */
+  body {
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-color: #171717;
+    color: #000;
+    line-height: 1.6;
+    position: relative;
+    font-family: sans-serif;
+    overflow: auto;
+  }
+  
+  /* Líneas animadas en el fondo */
+  .lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+    width: 90vw;
+  }
+  .lines .line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .lines .line::after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 15vh;
+    width: 100%;
+    top: -50%;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+    animation: run 7s 0s infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+  }
+  .lines .line:nth-child(1) {
+    margin-left: -25%;
+  }
+  .lines .line:nth-child(1)::after {
+    animation-delay: 2s;
+  }
+  .lines .line:nth-child(3) {
+    margin-left: 25%;
+  }
+  .lines .line:nth-child(3)::after {
+    animation-delay: 2.5s;
+  }
+  
+  @keyframes run {
+    0% {
+      top: -50%;
+    }
+    100% {
+      top: 110%;
+    }
+  }
+  
+  /* Estilos para la página completa del formulario */
+  .Pagina {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+  }
+  
+  /* Estilos para el formulario */
+  .Formulario {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 400px;
+      max-width: 90%;
+      z-index: 10; /* Para asegurarse de que el formulario esté sobre las líneas */
+  }
+  
+  /* Estilos generales para las etiquetas */
+  .Formulario label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #333333;
+  }
+  
+  /* Estilos generales para los campos de entrada */
+  .Formulario input[type="text"],
+  .Formulario input[type="email"],
+  .Formulario input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+  }
+  
+  /* Estilos para el checkbox y su label */
+  .Formulario .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+  
+  .Formulario .checkbox-container input[type="checkbox"] {
+      margin-right: 10px;
+  }
+  
+  /* Estilos para el botón */
+  .Formulario button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  }
+  
+  .Formulario button:hover {
+      background-color: #45a049;
+  }
+
+  
