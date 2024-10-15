@@ -4,8 +4,8 @@ import {
   ListGuesser,
   EditGuesser,
   ShowGuesser,
-  radiantLightTheme, 
-  radiantDarkTheme
+  houseLightTheme,
+  houseDarkTheme
 } from "react-admin";
 import {
     ProyectosList,
@@ -42,8 +42,8 @@ export const App = () => (
     authProvider={authProvider}
     i18nProvider={i18nProvider}
     dashboard={Dashboard}
-    lightTheme={radiantLightTheme}
-    darkTheme={radiantDarkTheme}
+    lightTheme={houseLightTheme}
+    darkTheme={houseDarkTheme}
   >
     <Resource
       name="admins"
