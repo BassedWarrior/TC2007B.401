@@ -44,7 +44,10 @@ export const AdminsCreate = () =>(
             <TextInput source = "usuario"/>
             <TextInput source = "correo"/>
             <TextInput source = "nombre"/>
-            <TextInput source = "rol"/>
+            <RadioButtonGroupInput source = "rol" choices = {[
+                { id: "administrador", name: "Administrador" },
+                { id: "empleado", name: "Empleado" },
+            ]} validate = {[required()]} />
         </SimpleForm>
     </Create>
 );
