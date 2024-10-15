@@ -2,12 +2,98 @@
 // Métodos encargados de las interacciones con la base de datos.
 
 // Esquema de donación de la base de datos.
+
 const Donacion = require("../models/Donacion");
 const mongoSanitize = require("mongo-sanitize"); // Agregamos mongo-sanitize
 // Funcion para sanitizar la entrada
 const sanitizeInput = (input) => mongoSanitize(input);
 
+const nodemailer = require("nodemailer");
 // Obtener todas las donaciones
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // true para usar SSL
+    auth: {
+        user: "test.testertestorio@gmail.com",
+        pass: "jdtv axxi dpuo sebk",
+    },
+});
+
+const CorreoDeAgradecimiento = async (email, nombre, monto) => {
+    const mailOptions = {
+        from: '"Tu Donación a Fundación Sanders" <tu-correo@gmail.com>',
+        to: email,
+        subject: "Gracias por tu donación!",
+        html: `
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gracias por tu Donación</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; padding: 20px; border-radius: 8px;">
+      <tr>
+        <td align="center" style="padding: 20px 0;">
+          <h1 style="color: #333333; font-size: 24px;">¡Gracias por tu Donación, ${nombre}!</h1>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 0;">
+          <p style="color: #666666; font-size: 16px; line-height: 24px; text-align: center;">
+            Nos complace informarte que hemos recibido tu generosa contribución de <strong>${monto} MXN</strong>.
+          </p>
+          <p style="color: #666666; font-size: 16px; line-height: 24px; text-align: center;">
+            Gracias a donaciones como la tuya, seguimos trabajando para proporcionar agua potable a comunidades en necesidad. 
+            <br />Tu apoyo hace una diferencia real en la vida de muchas personas.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 20px 0;">
+          <img src="https://sanders.com.mx/wp-content/uploads/2022/08/5.png" alt="Fundación Sanders" width="100%" style="max-width: 300px; border-radius: 8px;" />
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 20px 0;">
+          <p style="color: #666666; font-size: 16px; line-height: 24px; text-align: center;">
+            Actualmente, más de 12 millones de personas no tienen acceso a agua potable. Con tu ayuda, 
+            <br />nos acercamos un paso más a nuestra misión de llevar agua limpia a todas las comunidades.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 30px 0;">
+          <a href="https://sanders.com.mx/" style="background-color: #28a745; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 18px;">
+            Conoce más sobre nuestro trabajo
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 0; text-align: center;">
+          <hr style="border: none; height: 1px; background-color: #dddddd; margin: 20px 0;" />
+          <p style="color: #999999; font-size: 12px;">
+            Fundación Sanders, Av. Siempre Viva 123, Ciudad de México, México
+            <br />Si tienes alguna pregunta, contáctanos en <a href="mailto:info@sanders.com.mx" style="color: #28a745;">info@sanders.com.mx</a>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+    `,
+    };
+
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Correo enviado correctamente: " + info.response);
+    } catch (error) {
+        console.error("Error enviando el correo: ", error, email);
+        throw new Error("Error enviando el correo");
+    }
+};
+
 exports.getAllDonaciones = async (req, res) => {
     try {
         const donaciones = await Donacion.find();
@@ -48,6 +134,8 @@ exports.getDonacionById = async (req, res) => {
     }
 };
 
+const Donador = require("../models/Donador"); // Make sure you have a Donador model
+
 // Crear una nueva donacion
 exports.createDonacion = async (req, res) => {
     try {
@@ -58,7 +146,29 @@ exports.createDonacion = async (req, res) => {
             fecha: sanitizedBody.fecha,
             donador: sanitizedBody.donador,
         });
+
         const savedDonacion = await newDonacion.save();
+
+        // Fetch the donador's details using the donador ID
+        const donador = await Donador.findById(sanitizedBody.donador);
+        if (!donador) {
+            console.error("Donador no encontrado");
+        } else {
+            // Email sending
+            try {
+                await CorreoDeAgradecimiento(
+                    donador.correo,
+                    donador.nombre,
+                    sanitizedBody.monto,
+                );
+            } catch (emailError) {
+                console.error(
+                    "Error enviando el correo de agradecimiento:",
+                    emailError,
+                );
+            }
+        }
+
         res.status(201).json({
             id: savedDonacion._id,
             tipo: savedDonacion.tipo,
