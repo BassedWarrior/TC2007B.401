@@ -131,7 +131,7 @@ exports.getTotalDonacionesByTipo = async (req, res) => {
 
         res.json({
             monetaria: donacionesMonetarias.length > 0 ? donacionesMonetarias[0].total : 0,
-            especie: donacionesEfectivo.length > 0 ? donacionesEfectivo[0].total : 0
+            efectivo: donacionesEfectivo.length > 0 ? donacionesEfectivo[0].total : 0
         });
     } catch (err) {
         res.status(500).json({ error: 'Error al calcular las donaciones' });
