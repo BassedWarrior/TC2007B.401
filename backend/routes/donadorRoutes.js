@@ -6,7 +6,13 @@ const express = require("express");  // Módulo para generar los endpoints.
 const router = express.Router();  // Gerente de rutas y de endpoints.
 // Controlador de recurso en la base de datos.
 const donadorController = require("../controllers/donadorController");
+const auth = require("../middlewares/auth");
 
+router.use((req, res, next) => {
+    console.log("%s %s %s", req.method, req.url, req.path);
+    next();
+});
+router.use(auth.authenticateJWT);
 
 // Endpoints de distintos métodos HTTP para la ruta raiz de este recurso.
 // Referente a la totalidad de los donadores en la base de datos.
@@ -26,6 +32,5 @@ router.route("/:id")
     .put(donadorController.updateDonadorById)
     // HTTP DELETE: Eliminar un solo registro de donador de la base de datos.
     .delete(donadorController.deleteDonadorById);
-
 
 module.exports = router;
