@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");  // Utilizado para mantener la sesión iniciada.
 
 
-function generateJWT(user) {
+exports.generateJWT = (user) => {
     return jwt.sign(user, process.env.JWT_SECRET,
                     { expiresIn: process.env.JWT_EXPIRATION_TIME });
 };
 
 
-function authenticateJWT(req, res, next) {
+exports.authenticateJWT = (req, res, next) => {
     const token = req.headers.authorization;
 
     if (!token) {
@@ -23,6 +23,3 @@ function authenticateJWT(req, res, next) {
         next();
     });
 };
-
-
-module.exports = { generateJWT, authenticateJWT };
