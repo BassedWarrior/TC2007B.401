@@ -3,13 +3,15 @@
 
 // Esquema de proyecto de la base de datos.
 const Proyecto = require("../models/Proyecto");
-
+const mongoSanitize = require("mongo-sanitize"); // Agregamos mongo-sanitize
+// Funcion para sanitizar la entrada
+const sanitizeInput = (input) => mongoSanitize(input);
 
 // Obtener todas las proyectos
 exports.getAllProyectos = async (req, res) => {
     try {
         const proyectos = await Proyecto.find();
-        const proyectosWithId = proyectos.map(proyecto => ({
+        const proyectosWithId = proyectos.map((proyecto) => ({
             id: proyecto._id,
             nombre: proyecto.nombre,
             descripcion: proyecto.descripcion,
@@ -19,26 +21,21 @@ exports.getAllProyectos = async (req, res) => {
             presupuesto: proyecto.presupuesto,
             objetivo: proyecto.objetivo,
         }));
-        res.set('X-Total-Count', proyectos.length);
+        res.set("X-Total-Count", proyectos.length);
         res.json(proyectosWithId);
     } catch (err) {
-        res.status(500).json({ error: 'Error al obtener los proyectos' });
+        res.status(500).json({ error: "Error al obtener los proyectos" });
     }
 };
 
-
 // Obtener una sola proyecto por su ID
 exports.getProyectoById = async (req, res) => {
+    const { id } = sanitizeInput(req.params);
     try {
-        const { id } = req.params;
         const proyecto = await Proyecto.findById(id);
-
         if (!proyecto) {
-            return res.status(404).json(
-                { error: 'Proyecto no encontrado' }
-            );
+            return res.status(404).json({ error: "Proyecto no encontrado" });
         }
-
         const proyectoConId = {
             id: proyecto._id,
             nombre: proyecto.nombre,
@@ -49,25 +46,24 @@ exports.getProyectoById = async (req, res) => {
             presupuesto: proyecto.presupuesto,
             objetivo: proyecto.objetivo,
         };
-
         res.json(proyectoConId);
     } catch (err) {
-        res.status(500).json({ error: 'Error al buscar el proyecto' });
+        res.status(500).json({ error: "Error al buscar el proyecto" });
     }
 };
-
 
 // Crear una nueva proyecto
 exports.createProyecto = async (req, res) => {
     try {
+        const sanitizedBody = sanitizeInput(req.body);
         const newProyecto = new Proyecto({
-            nombre: req.body.nombre,
-            descripcion: req.body.descripcion,
-            inicio: req.body.inicio,
-            fin: req.body.fin,
-            estado: req.body.estado,
-            presupuesto: req.body.presupuesto,
-            objetivo: req.body.objetivo,
+            nombre: sanitizedBody.nombre,
+            descripcion: sanitizedBody.descripcion,
+            inicio: sanitizedBody.inicio,
+            fin: sanitizedBody.fin,
+            estado: sanitizedBody.estado,
+            presupuesto: sanitizedBody.presupuesto,
+            objetivo: sanitizedBody.objetivo,
         });
         const savedProyecto = await newProyecto.save();
         res.status(201).json({
@@ -81,22 +77,21 @@ exports.createProyecto = async (req, res) => {
             objetivo: savedProyecto.objetivo,
         });
     } catch (err) {
-        res.status(500).json({ error: 'Error al crear el proyecto' });
+        res.status(500).json({ error: "Error al crear el proyecto" });
     }
 };
-
 
 // Actualizar una proyecto por su ID
 exports.updateProyectoById = async (req, res) => {
     try {
+        const sanitizedBody = sanitizeInput(req.body);
         const updatedProyecto = await Proyecto.findByIdAndUpdate(
-            req.params.id, req.body, { new: true }
+            req.params.id,
+            sanitizedBody,
+            { new: true },
         );
-        if (!updatedProyecto) {
-            return res.status(404).json(
-                { error: 'Proyecto no encontrado' }
-            );
-        };
+        if (!updatedProyecto)
+            return res.status(404).json({ error: "Proyecto no encontrado" });
         res.json({
             id: updatedProyecto._id,
             nombre: updatedProyecto.nombre,
@@ -108,25 +103,20 @@ exports.updateProyectoById = async (req, res) => {
             objetivo: updatedProyecto.objetivo,
         });
     } catch (err) {
-        res.status(500).json({ error: 'Error al actualizar el proyecto' });
+        res.status(500).json({ error: "Error al actualizar el proyecto" });
     }
 };
 
-
 // Eliminar una proyecto por su ID
 exports.deleteProyectoById = async (req, res) => {
+    const { id } = sanitizeInput(req.params);
     try {
-        const deletedProyecto = await Proyecto.findByIdAndDelete(
-            req.params.id
-        );
-        if (!deletedProyecto) {
-            return res.status(404).json(
-                { error: 'Proyecto no encontrado' }
-            );
-        };
-        res.json({ message: 'Proyecto eliminado' });
+        const deletedProyecto = await Proyecto.findByIdAndDelete(id);
+        if (!deletedProyecto)
+            return res.status(404).json({ error: "Proyecto no encontrado" });
+        res.json({ message: "Proyecto eliminado" });
     } catch (err) {
-        res.status(500).json({ error: 'Error al eliminar el proyecto' });
+        res.status(500).json({ error: "Error al eliminar el proyecto" });
     }
 };
 
