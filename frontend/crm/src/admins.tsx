@@ -45,3 +45,17 @@ export const AdminsCreate = () =>(
         </SimpleForm>
     </Create>
 );
+
+export const AdminsShow = () => (
+    <Show>
+        <SimpleShowLayout>
+            <TextField source = "usuario" />
+            <EmailField source = "correo" />
+            <TextField source = "nombre" />
+            <SelectField source = "rol" choices = {[
+                { id: "administrador", name: "Administrador" },
+                { id: "empleado", name: "Empleado" },
+            ]} />
+        </SimpleShowLayout>
+    </Show>
+);
