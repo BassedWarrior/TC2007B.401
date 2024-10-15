@@ -33,16 +33,16 @@ const AdminSchema = new mongoose.Schema({
 
 const DonadorSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
-  correo: {type: String, required: true },
-  monto: {type: Number, required: true}
+  correo: {type: String, required: true }
 });
 
 const DonacionSchema = new mongoose.Schema({
   tipo: { type: String, required: true },
   monto: { type: String, required: true },
   fecha: { type: Date, required: true },
-  donador: { type: mongoose.Schema.Types.ObjectId, ref: 'Donador' } // Reference to donador
+  donador: { type: mongoose.Schema.Types.ObjectId, ref: 'Donador' } 
 });
+
 
 const ProyectoSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
