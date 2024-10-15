@@ -1,0 +1,135 @@
+
+
+.Guillermo {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 100%; 
+    padding: 2rem;
+    background-color: #BECED2;}
+
+.imagenContenedor {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem;
+
+}
+
+.Retrato {
+    width: 100%; 
+    max-width: 500px; 
+    height: auto; 
+    object-fit: cover; 
+    box-sizing: border-box;
+    box-shadow: 10px 10px 10px black;
+}
+
+.fundacion {
+    display: flex;
+    padding-top: 1.5rem;
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    
+}
+.primero, .segundo {
+    width: 48%; 
+    margin-bottom: 1.5rem;
+    line-height: 1.8rem;
+    color: #1f2933; 
+    font-size: 2rem;
+    text-align: center;
+    
+}
+
+.Parrafos {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    background-color: #BECED2;
+    flex-wrap: wrap; 
+}
+
+.Objetivo, .Mision, .Vision {
+    width: calc(33% - 1rem);
+    padding: 1.5rem;
+    background-color: #654D5E;
+    border-radius: 8px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0.5rem;
+    font-size: 1.1rem; }
+
+.Agua {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #BECED2; }
+
+
+.llevamosAgua {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+@media (max-width:768px){
+    .Agua {
+        display: none; 
+    }
+}
+
+@media (max-width: 768px) {
+    .Guillermo {
+        flex-direction: column;
+    }
+    .Parrafos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Objetivo, .Mision, .Vision {
+        width: 90%;
+    }
+
+    .Retrato {
+        max-width: 90%; 
+    }
+
+    .fundacion {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .primero, .segundo {
+        width: 100%; 
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .fundacion {
+        width: 100%; 
+        padding: 1rem;
+    }
+
+    .Retrato {
+        width: 100%;
+    }
+
+    .Parrafos {
+        padding: 1rem;
+    }
+
+    .Objetivo, .Mision, .Vision {
+        padding: 1rem;
+    }
+
+    .primero, .segundo {
+        font-size: 0.9rem;
+    }
+}

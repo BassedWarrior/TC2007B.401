@@ -18,6 +18,8 @@ import {
     DeleteButton,
 } from 'react-admin';
 
+import React from 'react';
+
 export const DonacionesList = () => (
     <List>
         <Datagrid>
@@ -83,4 +85,3 @@ export const DonacionesShow = () => (
         </Datagrid>
     </List>
 );
-
