@@ -117,8 +117,9 @@ exports.updateAdminById = async (req, res) => {
 };
 
 exports.deleteAdminById = async (req, res) => {
+    const { id } = sanitizeInput(req.params);
     try {
-        const deletedAdmin = await Admin.findByIdAndDelete(req.params.id);
+        const deletedAdmin = await Admin.findByIdAndDelete(id);
 
         if (!deletedAdmin)
             return res
