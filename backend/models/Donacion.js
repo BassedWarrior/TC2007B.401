@@ -6,7 +6,11 @@ const mongoose = require("mongoose"); // Módulo para interactuar con MongoDB.
 const DonacionSchema = new mongoose.Schema(
     {
         // Tipo de donación. Medio por el cual fue recibida. Efectivo o digital.
-        tipo: { type: String, required: true },
+        tipo: {
+            type: String,
+            required: true,
+            enum: ["efectivo", "digital"],
+        },
         // Monto recibido en la donación.
         monto: { type: String, required: true },
         // Fecha en que se realizó la donación.

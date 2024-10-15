@@ -14,8 +14,12 @@ router.route("/")
     // HTTP GET: Obtener todos los proyectoes de la base de datos.
     .get(proyectoController.getAllProyectos)
     // HTTP POST: Agregar una proyecto a la base de datos.
-    .post(proyectoController.createProyecto);
+    .post(proyectoController.createProyecto)
+    // HTTP GET: Separar los proyectos dependiendo en su fase
+    .get(proyectoController.getProyectosFases);
 
+router.route("/graphs")
+    .get(proyectoController.getProyectosFases);
 
 // Endpoints de distintos métodos HTTP para la ruta a un objeto específico.
 // Referente a una solo proyecto de la base de datos.

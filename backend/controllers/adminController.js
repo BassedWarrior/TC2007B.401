@@ -115,3 +115,28 @@ exports.updateAdminById = async (req, res) => {
         });
     }
 };
+
+exports.deleteAdminById = async (req, res) => {
+    const { id } = sanitizeInput(req.params);
+    try {
+        const deletedAdmin = await Admin.findByIdAndDelete(id);
+
+        if (!deletedAdmin)
+            return res
+                .status(404)
+                .json({ error: "Administrador no encontrado" });
+
+        res.json({
+            message: "Administrador eliminado con éxito",
+            id: deletedAdmin._id,
+            usuario: deletedAdmin.usuario,
+            correo: deletedAdmin.correo,
+            nombre: deletedAdmin.nombre,
+            rol: deletedAdmin.rol,
+        });
+    } catch (err) {
+        res.status(500).json({
+            error: "Error al eliminar el administrador",
+        });
+    }
+};

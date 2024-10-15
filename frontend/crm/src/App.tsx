@@ -4,8 +4,8 @@ import {
   ListGuesser,
   EditGuesser,
   ShowGuesser,
-  radiantLightTheme, 
-  radiantDarkTheme
+  houseLightTheme,
+  houseDarkTheme
 } from "react-admin";
 import {
     ProyectosList,
@@ -21,6 +21,12 @@ import {
   DonacionesList,
   DonacionesShow
 } from "./donaciones";
+import {
+    AdminsList,
+    AdminsEdit,
+    AdminsCreate,
+    AdminsShow
+} from "./admins";
 import jsonServerProvider from 'ra-data-json-server';
 import {authProvider} from "./Login";
 
@@ -42,13 +48,14 @@ export const App = () => (
     authProvider={authProvider}
     i18nProvider={i18nProvider}
     dashboard={Dashboard}
-    lightTheme={radiantLightTheme}
-    darkTheme={radiantDarkTheme}
+    lightTheme={houseLightTheme}
+    darkTheme={houseDarkTheme}
   >
     <Resource
       name="admins"
-      list={ListGuesser}
-      edit={EditGuesser}
+      list={AdminsList}
+      edit={AdminsEdit}
+      create={AdminsCreate}
       icon={ManageAccountsIcon}
     />
     <Resource

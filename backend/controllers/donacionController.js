@@ -216,3 +216,71 @@ exports.deleteDonacionById = async (req, res) => {
         res.status(500).json({ error: "Error al eliminar la donación" });
     }
 };
+
+exports.getTotalDonacionesByTipo = async (req, res) => {
+    try {
+        const donacionesMonetarias = await Donacion.aggregate([
+            { $match: { tipo: 'monetaria' } },
+            { 
+                $group: { 
+                    _id: null, 
+                    total: { $sum: { $toDouble: "$monto" } }
+                } 
+            }
+        ]);
+
+        const donacionesEfectivo = await Donacion.aggregate([
+            { $match: { tipo: 'efectivo' } },
+            { 
+                $group: { 
+                    _id: null, 
+                    total: { $sum: { $toDouble: "$monto" } }
+                } 
+            }
+        ]);
+
+        res.json({
+            monetaria: donacionesMonetarias.length > 0 ? donacionesMonetarias[0].total : 0,
+            efectivo: donacionesEfectivo.length > 0 ? donacionesEfectivo[0].total : 0
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al calcular las donaciones' });
+    }
+};
+
+exports.getDonacionesMensuales = async (req, res) => {
+    const currentYear = new Date().getFullYear();
+
+    try {
+        const donacionesMensuales = await Donacion.aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: new Date(`${currentYear}-01-01`),
+                        $lt: new Date(`${currentYear + 1}-01-01`)
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: { $month: "$fecha" },
+                    total: { $sum: { $toDouble: "$monto" } }
+                }
+            },
+            { $sort: { "_id": 1 } }
+        ]);
+
+        const donacionesPorMes = Array(12).fill(0);
+        donacionesMensuales.forEach(donacion => {
+            donacionesPorMes[donacion._id - 1] = donacion.total;
+        });
+
+        res.json({
+            year: currentYear,
+            donacionesMensuales: donacionesPorMes
+        });
+    } catch (err) {
+        console.error('Error details:', err);
+        res.status(500).json({ error: 'Error al calcular las donaciones mensuales' });
+    }
+};
