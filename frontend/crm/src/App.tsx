@@ -19,7 +19,12 @@ import {
   DonacionesList,
   DonacionesShow
 } from "./donaciones";
-import { AdminsList, AdminsEdit, AdminsCreate } from "./admins";
+import {
+    AdminsList,
+    AdminsEdit,
+    AdminsCreate,
+    AdminsShow
+} from "./admins";
 import jsonServerProvider from 'ra-data-json-server';
 import {authProvider} from "./Login";
 

@@ -4,6 +4,8 @@ import {
     Edit,
     SimpleForm,
     TextField,
+    SelectField,
+    RadioButtonGroupInput,
     TextInput,
     Create,
     required,
@@ -20,8 +22,12 @@ export const AdminsList = () =>(
             <TextField source = "usuario"/>
             <EmailField source = "correo"/>
             <TextField source = "nombre"/>
-            <TextField source = "rol"/>
+            <SelectField source = "rol" choices = {[
+                { id: "administrador", name: "Admnistrador" },
+                { id: "empleado", name: "Empleado" },
+            ]} />
             <EditButton/>
+            <DeleteButton/>
         </Datagrid>
     </List>
 );
@@ -29,11 +35,14 @@ export const AdminsList = () =>(
 export const AdminsEdit = () =>(
     <Edit>
         <SimpleForm>
-            <TextInput source = "usuario"/>
-            <TextInput source = "correo"/>
-            <TextInput source = "nombre"/>
-            <TextInput source = "contrasena"/>
-            <TextInput source = "rol"/>
+            <TextInput source = "usuario" validate = {[required()]} />
+            <TextInput source = "contrasena" validate = {[required()]} />
+            <TextInput source = "correo" validate = {[required()]} />
+            <TextInput source = "nombre" validate = {[required()]} />
+            <RadioButtonGroupInput source = "rol" choices = {[
+                { id: "administrador", name: "Administrador" },
+                { id: "empleado", name: "Empleado" },
+            ]} validate = {[required()]} />
         </SimpleForm>
     </Edit>
 );
@@ -41,9 +50,10 @@ export const AdminsEdit = () =>(
 export const AdminsCreate = () =>(
     <Create>
         <SimpleForm>
-            <TextInput source = "usuario"/>
-            <TextInput source = "correo"/>
-            <TextInput source = "nombre"/>
+            <TextInput source = "usuario" validate = {[required()]} />
+            <TextInput source = "contrasena" validate = {[required()]} />
+            <TextInput source = "correo" validate = {[required()]} />
+            <TextInput source = "nombre" validate = {[required()]} />
             <RadioButtonGroupInput source = "rol" choices = {[
                 { id: "administrador", name: "Administrador" },
                 { id: "empleado", name: "Empleado" },
