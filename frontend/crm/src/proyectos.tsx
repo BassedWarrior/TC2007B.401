@@ -17,6 +17,7 @@ import {
     EditButton,
     Create,
     required,
+    DeleteButton
 } from "react-admin";
 
 export const ProyectosList = () => (
@@ -41,6 +42,7 @@ export const ProyectosList = () => (
                 currency: "MXN",
             }} />
             <EditButton/>
+            <DeleteButton/>
         </Datagrid>
     </List>
 );
