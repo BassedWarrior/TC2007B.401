@@ -157,12 +157,12 @@ app.put("/api/admins/:id", async (req, res) => {
                 .status(404)
                 .json({ error: "Administrador no encontrado" });
         res.json({
-            id: admin._id,
-            usuario: admin.usuario,
-            contrasena: admin.contrasena,
-            correo: admin.correo,
-            nombre: admin.nombre,
-            rol: admin.rol,
+            id: updatedAdmin._id,
+            usuario: updatedAdmin.usuario,
+            contrasena: updatedAdmin.contrasena,
+            correo: updatedAdmin.correo,
+            nombre: updatedAdmin.nombre,
+            rol: updatedAdmin.rol,
         });
     } catch (err) {
         res.status(500).json({
