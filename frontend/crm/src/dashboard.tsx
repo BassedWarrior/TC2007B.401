@@ -4,8 +4,8 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid'; // Correct import for Grid
 import { Title } from 'react-admin';
-import { DonacionesPorTipo } from "./graphs/donacionesTipo";
-import { ProyectosPorFase } from "./graphs/estadoProyectos";
+import { DonacionesPorTipo } from "./graphs/tiposDonaciones";
+import { ProyectosPorFase } from "./graphs/fasesProyectos";
 import { DonacionesMensuales } from "./graphs/ingresoMensual";
 
 export const Dashboard = () => (
