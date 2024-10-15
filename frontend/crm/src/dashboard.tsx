@@ -4,32 +4,32 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid'; // Correct import for Grid
 import { Title } from 'react-admin';
-import { IngresoMensual } from "./graphs/ingresoMensual";
-import { ProyectosMensual } from "./graphs/proyectosMensual";
-import { EstadosProyectos } from "./graphs/estadoProyectos";
+import { DonacionesPorTipo } from "./graphs/donacionesTipo";
+import { ProyectosPorFase } from "./graphs/estadoProyectos";
+import { DonacionesMensuales } from "./graphs/ingresoMensual";
 
 export const Dashboard = () => (
     <div>
         <Title title="Dashboard" />
         <Grid container spacing={1}>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12}>
                 <Card>
                     <CardContent>
-                        <IngresoMensual />
+                        <DonacionesPorTipo/>
                     </CardContent>
                 </Card>
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12}>
                 <Card>
                     <CardContent>
-                        <ProyectosMensual />
+                        <ProyectosPorFase/>
                     </CardContent>
                 </Card>
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12}>
                 <Card>
                     <CardContent>
-                        <EstadosProyectos />
+                        <DonacionesMensuales/>
                     </CardContent>
                 </Card>
             </Grid>
