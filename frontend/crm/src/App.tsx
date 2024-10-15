@@ -40,6 +40,7 @@ export const App = () => (
       name="admins"
       list={AdminsList}
       edit={AdminsEdit}
+      create={AdminsCreate}
     />
     <Resource
       name="donadores"
