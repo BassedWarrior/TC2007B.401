@@ -124,18 +124,28 @@ exports.deleteDonacionById = async (req, res) => {
 exports.getTotalDonacionesByTipo = async (req, res) => {
     try {
         const donacionesMonetarias = await Donacion.aggregate([
-            { $match: { tipo: 'monetaria' } }, 
-            { $group: { _id: null, total: { $sum: "$monto" } } } 
+            { $match: { tipo: 'monetaria' } },
+            { 
+                $group: { 
+                    _id: null, 
+                    total: { $sum: { $toDouble: "$monto" } }
+                } 
+            }
         ]);
 
-        const donacionesEspecie = await Donacion.aggregate([
-            { $match: { tipo: 'especie' } },
-            { $group: { _id: null, total: { $sum: "$monto" } } } 
+        const donacionesEfectivo = await Donacion.aggregate([
+            { $match: { tipo: 'efectivo' } },
+            { 
+                $group: { 
+                    _id: null, 
+                    total: { $sum: { $toDouble: "$monto" } }
+                } 
+            }
         ]);
 
         res.json({
             monetaria: donacionesMonetarias.length > 0 ? donacionesMonetarias[0].total : 0,
-            especie: donacionesEspecie.length > 0 ? donacionesEspecie[0].total : 0
+            especie: donacionesEfectivo.length > 0 ? donacionesEfectivo[0].total : 0
         });
     } catch (err) {
         res.status(500).json({ error: 'Error al calcular las donaciones' });
@@ -158,7 +168,7 @@ exports.getDonacionesMensuales = async (req, res) => {
             {
                 $group: {
                     _id: { $month: "$fecha" },
-                    total: { $sum: "$monto" }
+                    total: { $sum: { $toDouble: "$monto" } }
                 }
             },
             { $sort: { "_id": 1 } }
@@ -174,6 +184,7 @@ exports.getDonacionesMensuales = async (req, res) => {
             donacionesMensuales: donacionesPorMes
         });
     } catch (err) {
+        console.error('Error details:', err);
         res.status(500).json({ error: 'Error al calcular las donaciones mensuales' });
     }
 };
