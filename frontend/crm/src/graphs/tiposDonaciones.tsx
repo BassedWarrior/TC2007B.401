@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recha
 
 // Define the type of data returned from the API
 interface DonacionTipoData {
-  monetaria: number;
+  digital: number;
   efectivo: number;
 }
 
@@ -19,7 +19,7 @@ export const DonacionesPorTipo: React.FC = () => {
       try {
         const response = await axios.get<DonacionTipoData>('https://localhost:5001/api/donaciones/graphsTipo');
         setData([
-          { name: 'Monetaria', value: response.data.monetaria },
+          { name: 'Digital', value: response.data.digital },
           { name: 'Efectivo', value: response.data.efectivo }
         ]);
       } catch (error) {
