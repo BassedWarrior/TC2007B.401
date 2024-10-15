@@ -8,7 +8,10 @@ import {
     Create,
     required,
     EmailField,
-    EditButton
+    EditButton,
+    DeleteButton,
+    Show,
+    SimpleShowLayout,
 } from 'react-admin';
 
 export const AdminsList = () =>(
