@@ -40,7 +40,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import WaterDamageIcon from '@mui/icons-material/WaterDamage';
 import AddCardIcon from '@mui/icons-material/AddCard';
 
-const dataProvider = jsonServerProvider('https://localhost:5001/api');
+import dataProvider from "./dataProvider";
 export const App = () => (
   <Admin
     layout={Layout}
