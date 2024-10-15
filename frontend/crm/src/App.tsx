@@ -24,6 +24,7 @@ import {authProvider} from "./Login";
 
 // Spanish Translation provider.
 import { i18nProvider } from "./spanishProvider";
+import { Dashboard } from "./dashboard";
 
 const dataProvider = jsonServerProvider('https://localhost:5001/api');
 export const App = () => (
@@ -32,6 +33,7 @@ export const App = () => (
     dataProvider={dataProvider}
     authProvider={authProvider}
     i18nProvider={i18nProvider}
+    dashboard={Dashboard}
   >
     <Resource
       name="admins"
