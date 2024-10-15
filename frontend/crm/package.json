@@ -19,6 +19,7 @@
     "react-admin": "^5.1.0",
     "react-dom": "^18.3.0",
     "react-plotly.js": "^2.6.0",
+    "recharts": "^2.13.0",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {
