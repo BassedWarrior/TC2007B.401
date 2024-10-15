@@ -6,7 +6,13 @@ const express = require("express");  // Módulo para generar los endpoints.
 const router = express.Router();  // Gerente de rutas y de endpoints.
 // Controlador de recurso en la base de datos.
 const proyectoController = require("../controllers/proyectoController");
+const auth = require("../middlewares/auth");
 
+router.use((req, res, next) => {
+    console.log("%s %s %s", req.method, req.url, req.path);
+    next();
+});
+router.use(auth.authenticateJWT);
 
 // Endpoints de distintos métodos HTTP para la ruta raiz de este recurso.
 // Referente a la totalidad de los proyectos en la base de datos.
@@ -30,6 +36,5 @@ router.route("/:id")
     .put(proyectoController.updateProyectoById)
     // HTTP DELETE: Eliminar un solo registro de proyecto de la base de datos.
     .delete(proyectoController.deleteProyectoById);
-
 
 module.exports = router;
