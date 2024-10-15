@@ -20,7 +20,7 @@ export const DonacionesPorTipo: React.FC = () => {
         const response = await axios.get<DonacionTipoData>('https://localhost:5001/api/donaciones/graphsTipo');
         setData([
           { name: 'Monetaria', value: response.data.monetaria },
-          { name: 'Especie', value: response.data.especie }
+          { name: 'Efectivo', value: response.data.efectivo }
         ]);
       } catch (error) {
         console.error('Error fetching data:', error);
