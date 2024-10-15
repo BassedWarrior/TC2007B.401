@@ -25,6 +25,7 @@ router
     // HTTP PUT: Actualizar un solo registro de administrador de la base de
     // datos.
     .put(adminController.updateAdminById)
+    // HTTP DELETE: Eliminar un solo registro de administrador de la base de datos.
     .delete(adminController.deleteAdminById);
 
 module.exports = router;
