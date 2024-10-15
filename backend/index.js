@@ -33,6 +33,16 @@ app.use(
     }),
 );
 
+app.use(
+    cors({
+        origin: "https://localhost:5137",
+        exposedHeaders: ["X-Total-Count"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
+    }),
+);
+
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Connected"))

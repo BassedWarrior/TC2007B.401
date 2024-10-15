@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import '../css/Donaciones.css';
 
+const apiUrl = import.meta.env.VITE_API_URL;  // Importar la URL base desde el archivo .env
+
 function Donaciones() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -11,7 +13,7 @@ function Donaciones() {
 
         try {
             // Primero, insertar el donador en la colección Donador
-            const donadorResponse = await fetch('https://localhost:5001/api/donadores', {
+            const donadorResponse = await fetch(`${apiUrl}/donadores`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,7 +36,7 @@ function Donaciones() {
                     donador: donadorResult._id  // ID del donador registrado
                 };
 
-                const donacionResponse = await fetch('https://localhost:5001/api/donaciones', {  // Actualizar URL a la ruta de donaciones
+                const donacionResponse = await fetch(`${apiUrl}/donaciones`, {  // Actualizar URL a la ruta de donaciones
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
