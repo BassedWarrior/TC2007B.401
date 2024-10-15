@@ -7,6 +7,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 // Esquema de administrador de la base de datos.
 const Admin = require("../models/Admin");
+const auth = require("../middlewares/auth");
 
 
 exports.authenticate = async (req, res) => {
@@ -24,9 +25,7 @@ exports.authenticate = async (req, res) => {
                 { error: 'Usuario o Contraseña Incorrectos' }
             );
         }
-        const token = jwt.sign(
-            { userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' }
-        );
+        const token = auth.generateJWT({ user: user._id });
         res.json({ token });
         console.log(process.env.JWT_SECRET);
     } catch (err) {

@@ -9,6 +9,7 @@ exports.generateJWT = (user) => {
 
 exports.authenticateJWT = (req, res, next) => {
     const token = req.headers.authorization;
+    console.log("RECEIVED TOKEN: ", token);
 
     if (!token) {
         return res.status(401).send("No se proporcionó token");
@@ -19,7 +20,7 @@ exports.authenticateJWT = (req, res, next) => {
             return res.status(403).json({ error: "Token inválido" });
         };
 
-        req.user = decode;
+        req.user = decoded;
         next();
     });
 };
