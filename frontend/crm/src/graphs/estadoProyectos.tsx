@@ -6,9 +6,16 @@ export const EstadosProyectos =()=>(
     data={[{
         type: 'pie', 
         values:[320, 25, 210, 4], 
-        labels:["Planeado", "En Progreso", "Completado", "Cancelado"]
+        labels:["Planeado", "En Progreso", "Completado", "Cancelado"],
+        marker: {
+          colors: ['#9055FD', '#FDD055', '#FD55CC', '#5522FD']
+        }
     }]}
-    layout={ {width: 320, height: 240, title: 'Estados de los Proyectos'} }
+    layout={{width: 500, 
+            height: 350, 
+            title: {text: 'Estados de los Proyectos', font:{color: "#828282", size:20}},
+            legend:{font:{color: "#828282"}},  
+            paper_bgcolor:"rgba(0, 120, 0, 0)"}}
     config={{displayModeBar:false}}
   />
 );

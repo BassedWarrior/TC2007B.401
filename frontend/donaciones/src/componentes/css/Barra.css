@@ -1,0 +1,83 @@
+.NavBar {
+    background-color: #192459;
+    color: rgb(236, 36, 36);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.LogoSanders {
+    width: 4rem; 
+    height: 4rem;
+    margin-right: 1rem;
+}
+
+/* Botones generales */
+.boton {
+    min-width: 7rem; 
+    height: 2.5rem;
+    color: #fff;
+    padding: 0.5rem 1rem; 
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;  
+    border-radius: 2rem;
+    border: 2px solid #00A3B5;
+    background: #00A3B5;
+    margin-left: 0.5rem;
+}
+
+/* Hover para los botones generales */
+.boton:hover {
+    background: #fff;
+    color: #00A3B5;
+}
+
+.boton.donar {
+    background-color: #F44A7E;
+    border-color: #F44A7E;
+}
+
+/* Hover para el botón "DONAR AHORA" */
+.boton.donar:hover {
+    background: #fff;
+    color: #F44A7E;
+}
+
+/* Flexbox para centrar los botones */
+.botones {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap; /* Permite que los botones se acomoden en nuevas líneas si es necesario */
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .NavBar {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .LogoSanders {
+        margin-bottom: 1rem;
+    }
+
+    .botones {
+        justify-content: center; 
+    }
+
+    .boton {
+        min-width: 100%; 
+        margin-left: 0;
+        margin-bottom: 0.5rem; 
+    }
+
+    .boton.donar {
+        margin-top: 0.5rem; 
+    }
+}

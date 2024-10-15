@@ -15,7 +15,10 @@ import {
     ReferenceInput,
     SelectInput,
     required,
+    DeleteButton,
 } from 'react-admin';
+
+import React from 'react';
 
 export const DonacionesList = () => (
     <List>
@@ -30,6 +33,7 @@ export const DonacionesList = () => (
                 <TextField source="correo" /> 
             </ReferenceField>
             <EditButton />
+            <DeleteButton/>
         </Datagrid>
     </List>
 );
@@ -81,4 +85,3 @@ export const DonacionesShow = () => (
         </Datagrid>
     </List>
 );
-
