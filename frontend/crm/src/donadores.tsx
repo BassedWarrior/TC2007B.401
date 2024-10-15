@@ -8,7 +8,8 @@ import {
     Create,
     required,
     EmailField,
-    EditButton
+    EditButton,
+    DeleteButton
 } from 'react-admin';
 
 export const DonadoresList = () =>(
@@ -17,6 +18,7 @@ export const DonadoresList = () =>(
             <TextField source = "nombre"/>
             <EmailField source = "correo"/>
             <EditButton/>
+            <DeleteButton/>
         </Datagrid>
     </List>
 );
