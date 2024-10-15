@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recha
 // Define the type of data returned from the API
 interface DonacionTipoData {
   monetaria: number;
-  especie: number;
+  efectivo: number;
 }
 
 const COLORS = ['#0088FE', '#00C49F'];
