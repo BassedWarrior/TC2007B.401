@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import '../css/Donaciones.css'
+import '../css/Donaciones.css';
 
 function Donaciones() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -10,18 +10,47 @@ function Donaciones() {
         console.log('Datos enviados:', data);
 
         try {
-            const response = await fetch('https://localhost:5001/api/donarahora', {
+            // Primero, insertar el donador en la colección Donador
+            const donadorResponse = await fetch('https://localhost:5001/api/donadores', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)  // Convertir el objeto de datos a JSON
+                body: JSON.stringify({
+                    nombre: data.nombre,
+                    correo: data.correo
+                })  // Solo enviar nombre y correo para Donador
             });
-            if (response.ok) {
-                const result = await response.json();
-                console.log('Donación exitosa:', result);
+
+            if (donadorResponse.ok) {
+                const donadorResult = await donadorResponse.json();
+                console.log('Donador registrado:', donadorResult);
+
+                // Después, insertar la donación en la colección Donacion
+                const donacionData = {
+                    tipo: "digital",  // Tipo de donación siempre es "digital"
+                    monto: data.monto,  // Monto recibido
+                    fecha: new Date(),  // Fecha actual
+                    donador: donadorResult._id  // ID del donador registrado
+                };
+
+                const donacionResponse = await fetch('https://localhost:5001/api/donaciones', {  // Actualizar URL a la ruta de donaciones
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(donacionData)  // Enviar los datos de la donación
+                });
+
+                if (donacionResponse.ok) {
+                    const donacionResult = await donacionResponse.json();
+                    console.log('Donación exitosa:', donacionResult);
+                    // Aquí puedes agregar una lógica para manejar el éxito de la donación
+                } else {
+                    console.error('Error en la donación:', await donacionResponse.text());
+                }
             } else {
-                console.error('Error en la donación');
+                console.error('Error en el registro del donador:', await donadorResponse.text());
             }
         } catch (error) {
             console.error('Error de red:', error);

@@ -1,195 +1,39 @@
-/* Restablecer márgenes y espacios */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box !important;
-}
-
-/* Estilos para la página completa */
-html, body {
-  height: 100%;
-}
-
-body {
-  display: table;
-  width: 100%;
-  height: 100%;
-  background-color: #171717;
-  color: #000;
-  line-height: 1.6;
-  font-family: sans-serif;
-  position: relative;
-  overflow: auto;
-}
-
-/* Animaciones de líneas en el fondo */
-.lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  margin: auto;
-  width: 90vw;
-}
-.lines .line {
-  position: absolute;
-  width: 1px;
-  height: 100%;
-  top: 0;
-  left: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-}
-.lines .line::after {
-  content: "";
-  display: block;
-  position: absolute;
-  height: 15vh;
-  width: 100%;
-  top: -50%;
-  left: 0;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), color-stop(75%, #ffffff), to(#ffffff));
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
-  -webkit-animation: run 7s 0s infinite;
-          animation: run 7s 0s infinite;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
-          animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
-}
-.lines .line:nth-child(1) {
-  margin-left: -25%;
-}
-.lines .line:nth-child(1)::after {
-  -webkit-animation-delay: 2s;
-          animation-delay: 2s;
-}
-.lines .line:nth-child(3) {
-  margin-left: 25%;
-}
-.lines .line:nth-child(3)::after {
-  -webkit-animation-delay: 2.5s;
-          animation-delay: 2.5s;
-}
-
-@-webkit-keyframes run {
-  0% {
-    top: -50%;
-  }
-  100% {
-    top: 110%;
-  }
-}
-
-@keyframes run {
-  0% {
-    top: -50%;
-  }
-  100% {
-    top: 110%;
-  }
-}
-
-/* Estilos del contenedor de la página */
-.Pagina {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: transparent; /* Fondo transparente para ver las líneas */
-    padding: 20px;
-    position: relative;
-    z-index: 1; /* Asegurar que el formulario esté por encima de las líneas */
-}
-
-/* Estilo del formulario */
 form {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  min-height: 100vh; 
+  padding: 20px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  background-color: #f8f9fa;
+  border-radius: 8px; 
 }
 
-/* Estilo de las etiquetas */
 label {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 5px;
+  margin: 10px 0; 
 }
 
-/* Estilo de los inputs */
-input[type="text"],
-input[type="email"],
-input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #333;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    transition: border-color 0.3s ease;
+
+input {
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  width: 100%; 
+  max-width: 400px; 
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus {
-    border-color: #007bff;
-    outline: none;
+
+button {
+  padding: 10px 15px; 
+  border: none; 
+  border-radius: 5px; 
+  background-color: #007bff; 
+  color: white; 
+  cursor: pointer;
+  transition: background-color 0.3s; 
 }
 
-/* Estilo del checkbox */
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.checkbox-container label {
-    font-size: 0.9rem;
-    color: #555;
-}
-
-/* Estilo del botón */
-button[type="submit"] {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-}
-
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-/* Estilo de los mensajes de error */
-span {
-    color: #d9534f;
-    font-size: 0.85rem;
-    margin-top: -10px;
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 600px) {
-    form {
-        padding: 15px;
-        max-width: 100%;
-    }
-
-    label, input[type="text"], input[type="email"], input[type="number"], button {
-        font-size: 0.9rem;
-    }
+button:hover {
+  background-color: #0056b3; 
 }
