@@ -21,6 +21,12 @@ import {
   DonacionesList,
   DonacionesShow
 } from "./donaciones";
+import {
+    AdminsList,
+    AdminsEdit,
+    AdminsCreate,
+    AdminsShow
+} from "./admins";
 import jsonServerProvider from 'ra-data-json-server';
 import {authProvider} from "./Login";
 
@@ -47,8 +53,9 @@ export const App = () => (
   >
     <Resource
       name="admins"
-      list={ListGuesser}
-      edit={EditGuesser}
+      list={AdminsList}
+      edit={AdminsEdit}
+      create={AdminsCreate}
       icon={ManageAccountsIcon}
     />
     <Resource
