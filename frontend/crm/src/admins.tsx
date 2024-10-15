@@ -29,6 +29,7 @@ export const AdminsEdit = () =>(
             <TextInput source = "usuario"/>
             <TextInput source = "correo"/>
             <TextInput source = "nombre"/>
+            <TextInput source = "contrasena"/>
             <TextInput source = "rol"/>
         </SimpleForm>
     </Edit>
