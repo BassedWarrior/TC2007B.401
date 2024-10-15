@@ -1,52 +1,56 @@
 import React from 'react';
-
-import useSWR,{mutate} from 'swr';
 import { useForm } from 'react-hook-form';
+import '../css/Donaciones.css'
 
-import '../css/Donaciones.css';
-
-
-
-
-
-const Donaciones = () => {
-
+function Donaciones() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    console.log(errors);
-    const onSubmit = handleSubmit((data) => { console.log(data); });
+
+    const onSubmit = async (data) => {
+        // Imprimir el JSON en la consola del navegador
+        console.log('Datos enviados:', data);
+
+        try {
+            const response = await fetch('https://localhost:5001/api/donarahora', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)  // Convertir el objeto de datos a JSON
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Donación exitosa:', result);
+            } else {
+                console.error('Error en la donación');
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
+        }
+    };
 
     return (
-        <div className='Pagina'>
-            {/* Contenedor para las líneas animadas */}
-            <div className="lines">
-                <div className="line"></div>
-                <div className="line"></div>
-                <div className="line"></div>
-            </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <label>
+                Nombre:
+                <input type="text" {...register('nombre', { required: true })} />
+                {errors.nombre && <span>Este campo es requerido</span>}
+            </label>
 
-            {/* Formulario de donaciones */}
-            <form onSubmit={onSubmit}>
-                <label htmlFor='nombre'>Nombre: </label>
-                <input type='text' {...register("nombre", { required: true })} />
-                {errors.nombre && <span>Nombre es requerido</span>}
+            <label>
+                Correo:
+                <input type="email" {...register('correo', { required: true })} />
+                {errors.correo && <span>Este campo es requerido</span>}
+            </label>
 
-                <label htmlFor='correo'>Correo electrónico: </label>
-                <input type='email' {...register("correo", { required: true })} />
-                {errors.correo && <span>Correo electrónico es requerido</span>}
+            <label>
+                Monto:
+                <input type="number" {...register('monto', { required: true, min: 1 })} />
+                {errors.monto && <span>El monto debe ser mayor que 0</span>}
+            </label>
 
-                <label htmlFor='monto'>Monto a donar: </label>
-                <input type='number' {...register("monto",{required:true, min:1})} />
-
-                <div className="checkbox-container">
-                    <input type='checkbox' id='terminos' {...register("terminos", { required: true })} />
-                    <label htmlFor='terminos'>Acepto términos y condiciones</label>
-                    {errors.terminos && <span>Debes aceptar los términos y condiciones</span>}
-                </div>
-
-                <button type='submit'>Donar</button>
-            </form>
-        </div>
+            <button type="submit">Donar</button>
+        </form>
     );
-};
+}
 
 export default Donaciones;

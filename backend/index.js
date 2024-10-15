@@ -33,7 +33,8 @@ const AdminSchema = new mongoose.Schema({
 
 const DonadorSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
-  correo: {type: String, required: true }
+  correo: {type: String, required: true },
+  monto: {type: Number, required: true}
 });
 
 const DonacionSchema = new mongoose.Schema({
@@ -442,4 +443,27 @@ const options = {
 // Create the server listener in the specified port using HTTPS instead of HTTP.
 https.createServer(options, app).listen(PORT, () => {
     console.log(`Server running on https://localhost:${PORT}`);
+});
+
+
+
+
+
+
+app.post('/api/donarahora', async (req, res) => {
+  const { nombre, correo, monto } = req.body;
+
+  // Crear una nueva instancia del modelo Donador con los datos recibidos
+  const nuevoDonador = new Donador({ nombre, correo, monto });
+
+  try {
+    // Guardar el nuevo donador en la base de datos
+    const resultado = await nuevoDonador.save();
+    res.status(201).json({
+      message: 'Donador creado exitosamente',
+      donador: resultado
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear el donador', detalles: error.message });
+  }
 });
