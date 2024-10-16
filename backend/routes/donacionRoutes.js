@@ -22,14 +22,6 @@ router.route("/")
     // HTTP POST: Agregar una donación a la base de datos.
     .post(donacionController.createDonacion)
 
-router.route("/graphsTipo")
-    // HTTP GET: Agregar una donación a la base de datos.
-    .get(donacionController.getTotalDonacionesByTipo)
-    
-router.route("/graphsMes")
-    // HTTP GET: Agregar una donación a la base de datos.
-    .get(donacionController.getDonacionesMensuales) 
-
 // Endpoints de distintos métodos HTTP para la ruta a un objeto específico.
 // Referente a una solo donación de la base de datos.
 router.route("/:id")

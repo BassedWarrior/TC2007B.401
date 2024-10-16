@@ -14,6 +14,8 @@ const donacionRoutes = require("./routes/donacionRoutes");
 const proyectoRoutes = require("./routes/proyectoRoutes");
 // Rutas de endpoints para el inicio de sesión
 const loginRoutes = require("./routes/loginRoutes");
+// Rutas de endpoints para las gráficas
+const graphRoutes = require("./routes/graphRoutes");
 
 const auth = require("./middlewares/auth");  // Utilizado para autenticación.
 
@@ -50,6 +52,9 @@ app.use("/api/proyectos", proyectoRoutes);
 
 // Utilizar rutas de endpoints para inicio de sesión
 app.use("/api/login", loginRoutes);
+
+// Utilizar rutas de endpoints para gráficas.
+app.use("/api/graphs", graphRoutes);
 
 app.get("/", (req, res) => {
     res.send("This is the backend URI");
