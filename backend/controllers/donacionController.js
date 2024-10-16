@@ -140,33 +140,37 @@ const Donador = require("../models/Donador"); // Make sure you have a Donador mo
 exports.createDonacion = async (req, res) => {
     try {
         const sanitizedBody = sanitizeInput(req.body);
+
+        let donador = await Donador.findById(sanitizedBody.donador);
+
+        if (!donador) {
+            if (!sanitizedBody.nombre || !sanitizedBody.correo) {
+                return res.status(400).json({ error: "Faltan datos del donador" });
+            }
+            donador = new Donador({
+                nombre: sanitizedBody.nombre,
+                correo: sanitizedBody.correo,
+            });
+            try {
+                donador = await donador.save();
+            } catch (err) {
+                return res.status(500).json({ error: "Error al crear el donador" });
+            }
+        }
+
         const newDonacion = new Donacion({
             tipo: sanitizedBody.tipo,
             monto: sanitizedBody.monto,
             fecha: sanitizedBody.fecha,
-            donador: sanitizedBody.donador,
+            donador: donador._id,
         });
 
         const savedDonacion = await newDonacion.save();
 
-        // Fetch the donador's details using the donador ID
-        const donador = await Donador.findById(sanitizedBody.donador);
-        if (!donador) {
-            console.error("Donador no encontrado");
-        } else {
-            // Email sending
-            try {
-                await CorreoDeAgradecimiento(
-                    donador.correo,
-                    donador.nombre,
-                    sanitizedBody.monto,
-                );
-            } catch (emailError) {
-                console.error(
-                    "Error enviando el correo de agradecimiento:",
-                    emailError,
-                );
-            }
+        try {
+            await CorreoDeAgradecimiento(donador.correo, donador.nombre, sanitizedBody.monto);
+        } catch (emailError) {
+            console.error("Error enviando el correo de agradecimiento:", emailError);
         }
 
         res.status(201).json({
