@@ -4,8 +4,8 @@ import {
   ListGuesser,
   EditGuesser,
   ShowGuesser,
-  radiantLightTheme, 
-  radiantDarkTheme
+  houseLightTheme,
+  houseDarkTheme
 } from "react-admin";
 import {
     ProyectosList,
@@ -21,6 +21,12 @@ import {
   DonacionesList,
   DonacionesShow
 } from "./donaciones";
+import {
+    AdminsList,
+    AdminsEdit,
+    AdminsCreate,
+    AdminsShow
+} from "./admins";
 import jsonServerProvider from 'ra-data-json-server';
 import {authProvider} from "./Login";
 
@@ -34,7 +40,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import WaterDamageIcon from '@mui/icons-material/WaterDamage';
 import AddCardIcon from '@mui/icons-material/AddCard';
 
-const dataProvider = jsonServerProvider('https://localhost:5001/api');
+import dataProvider from "./dataProvider";
 export const App = () => (
   <Admin
     layout={Layout}
@@ -42,13 +48,14 @@ export const App = () => (
     authProvider={authProvider}
     i18nProvider={i18nProvider}
     dashboard={Dashboard}
-    lightTheme={radiantLightTheme}
-    darkTheme={radiantDarkTheme}
+    lightTheme={houseLightTheme}
+    darkTheme={houseDarkTheme}
   >
     <Resource
       name="admins"
-      list={ListGuesser}
-      edit={EditGuesser}
+      list={AdminsList}
+      edit={AdminsEdit}
+      create={AdminsCreate}
       icon={ManageAccountsIcon}
     />
     <Resource

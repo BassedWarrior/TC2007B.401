@@ -5,6 +5,7 @@ import {
     EditButton,
     SimpleForm,
     TextField,
+    SelectField,
     NumberField,
     NumberInput,
     DateField,
@@ -23,7 +24,10 @@ import React from 'react';
 export const DonacionesList = () => (
     <List>
         <Datagrid>
-            <TextField source="tipo" />
+            <SelectField source="tipo" choices={[
+                { id: "efectivo", name: "Efectivo" },
+                { id: "digital", name: "Digital" },
+            ]} />
             <NumberField source="monto" options={{
                 style: 'currency',
                 currency: 'MXN'
@@ -42,8 +46,8 @@ export const DonacionesEdit = () => (
     <Edit>
         <SimpleForm>
             <RadioButtonGroupInput source='tipo' choices={[
-                { id: 'especie', name: 'Especie' },
-                { id: 'monetaria', name: 'Monetaria' }
+                { id: "efectivo", name: "Efectivo" },
+                { id: "digital", name: "Digital" }
             ]} validate={[required()]} />
             <NumberInput source="monto" validate={[required()]} />
             <DateInput source="fecha" validate={[required()]} />
@@ -58,8 +62,8 @@ export const DonacionesCreate = () => (
     <Create redirect='/donaciones'>
         <SimpleForm>
             <RadioButtonGroupInput source='tipo' choices={[
-                { id: 'especie', name: 'Especie' },
-                { id: 'monetaria', name: 'Monetaria' }
+                { id: "efectivo" , name: "Efectivo" },
+                { id: "digital", name: "Digital" }
             ]} validate={[required()]} />
             <NumberInput source="monto" validate={[required()]} />
             <DateInput source="fecha" validate={[required()]} />

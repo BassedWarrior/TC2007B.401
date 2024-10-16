@@ -119,3 +119,27 @@ exports.deleteProyectoById = async (req, res) => {
         res.status(500).json({ error: "Error al eliminar el proyecto" });
     }
 };
+
+exports.getProyectosFases = async (req, res) => {
+    try {
+        const result = await Proyecto.aggregate([
+            {
+                $group: {
+                    _id: "$estado",
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    phase: '$_id',
+                    count: 1,
+                    _id: 0
+                }
+            }
+        ]);
+        res.json(result);
+    } catch (error) {
+        console.error('Error obteniendo los proyectos por estado:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};

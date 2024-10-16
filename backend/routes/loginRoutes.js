@@ -6,6 +6,10 @@ const router = express.Router();  // Gerente de rutas y de endpoints
 // Controlador de inicio de sesión
 const loginController = require("../controllers/loginController");
 
+router.use((req, res, next) => {
+    console.log("%s %s %s", req.method, req.url, req.path);
+    next();
+});
 
 // Endpoints de distintos métodos HTTP para la ruta raiz de este recurso
 router.route("/")

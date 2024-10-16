@@ -1,18 +1,48 @@
-import React from 'react';
-import Plot from 'react-plotly.js';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-export const IngresoMensual =()=>(
-  <Plot
-    data={[
-      {type: 'bar', x: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio"], 
-                    y: [2, 5, 3, 4, 2, 5, 8], 
-                    marker:{color: "rgba(144, 85, 253, 0.5)"}},
-      ]}
-    layout={{width: 600, height: 350, 
-            title: {text: 'Ingresos Mensuales 2024', font:{color: "#828282", size:25}}, 
-            xaxis:{color: "828282"}, 
-            yaxis:{title: "Ingresos (MXN)", color: "828282"}, 
-            paper_bgcolor:"rgba(0, 120, 0, 0)"}}
-    config={{displayModeBar:false}}
-  />
-);
+// Define the type of data returned from the API
+interface DonacionesMensualesData {
+  year: number;
+  donacionesMensuales: number[];
+}
+
+const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+export const DonacionesMensuales: React.FC = () => {
+  const [data, setData] = useState<{ name: string; value: number }[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<DonacionesMensualesData>('https://localhost:5001/api/donaciones/graphsMes');
+        const monthlyData = response.data.donacionesMensuales.map((value, index) => ({
+          name: months[index],
+          value
+        }));
+        setData(monthlyData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <h2>Donaciones Mensuales en {new Date().getFullYear()}</h2>
+      <ResponsiveContainer width="100%" height={400}>
+        <BarChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="value" fill="#0088FE" name="Donaciones" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
