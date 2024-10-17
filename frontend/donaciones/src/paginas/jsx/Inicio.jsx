@@ -2,8 +2,8 @@ import React from 'react'
 import "./../css/inicio.css"
 
 import Captacion from '../../../public/imagenes/inicio/captacion.png'
-import Cisternas from '../../../public/imagenesimagenes/inicio/cisternas.png'
-import CuidarAgua from '../../../public/imagenesimagenes/inicio/cuidarAgua.jpg'
+import Cisternas from '../../../public/imagenes/inicio/cisternas.png'
+import CuidarAgua from '../../../public/imagenes/inicio/cuidarAgua.jpg'
 
 
 const Inicio = () => {

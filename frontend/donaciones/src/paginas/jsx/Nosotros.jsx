@@ -2,8 +2,8 @@ import React from 'react'
 
 import "../css/Nosotros.css"
 
-import Guillermo from '../../../public/imagenesimagenes/Nosotros/GuillermoSandersAcedo.png'
-import Agua from '../../../public/imagenesimagenes/Nosotros/llevamosAgua.png'
+import Guillermo from '../../../public/imagenes/Nosotros/GuillermoSandersAcedo.png'
+import Agua from '../../../public/imagenes/Nosotros/llevamosAgua.png'
 
 const Nosotros = () => {
   return (
