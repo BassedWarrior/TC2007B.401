@@ -6,16 +6,18 @@ function Donaciones() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        // Imprimir el JSON en la consola del navegador
-        console.log('Datos enviados:', data);
+        const date = new Date();
+        const params = {"tipo": "digital", "fecha": eval(date)};
+        
+        const body_sent = Object.assign({}, data, params);
 
         try {
-            const response = await fetch('https://localhost:5001/api/donarahora', {
+            const response = await fetch('https://localhost:5001/api/donar_ahora', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)  // Convertir el objeto de datos a JSON
+                body: JSON.stringify(body_sent)  // Convertir el objeto de datos a JSON
             });
             if (response.ok) {
                 const result = await response.json();
