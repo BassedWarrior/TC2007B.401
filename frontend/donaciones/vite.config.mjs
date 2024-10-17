@@ -5,8 +5,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     plugins: [react()],
     define: {
-        'process.env': process.env,},
-        
+        'process.env': process.env,
+    },
     server: {
         host: true,
         https: {
@@ -17,4 +17,7 @@ export default defineConfig({
         open: true,
     },
     base: '/',
+    build: {
+        outDir: 'dist', // Especifica que la salida se generará en la carpeta 'dist'
+    },
 });
