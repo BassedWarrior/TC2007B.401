@@ -26,12 +26,12 @@ const PORT = process.env.PORT || 5000;
 // Únicamente permite conexiones desde nuestro frontend.
 app.use(
     cors({
-        origin: "https://localhost:5173",
+        origin: ["https://localhost:5173", "http://localhost:3000"],
         exposedHeaders: ["X-Total-Count"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
-    }),
+    })
 );
 
 mongoose
