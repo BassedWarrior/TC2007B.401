@@ -20,6 +20,7 @@ Inicio de sesión con credenciales predeterminadas
 -------------------------------------------------
 
 ### 1\. Iniciar sesión con credenciales por defecto
+[Regresar al índice](#índice)
 
 Usuario: admin  
 Contraseña: admin
@@ -28,6 +29,7 @@ Contraseña: admin
 
 Creación de usuarios administrativos
 ------------------------------------
+[Regresar al índice](#índice)
 
 ### 2\. Crear un nuevo usuario administrativo
 
@@ -59,6 +61,7 @@ Esto es para deshacerse del usuario por defecto y mantener la seguridad del sist
 
 Cierre de sesión y credenciales nuevas
 --------------------------------------
+[Regresar al índice](#índice)
 
 ### 8\. Cierre de sesión
 
@@ -80,6 +83,7 @@ Utilizando las credenciales creadas en el paso #6, se puede iniciar sesión como
 
 Donadores
 ---------
+[Regresar al índice](#índice)
 
 ### 11\. Manejo de donadores
 
@@ -107,6 +111,7 @@ El donador ahora está registrado en el sistema.
 
 Acciones en grupo
 -----------------
+[Regresar al índice](#índice)
 
 ### 15\. Selección de elementos
 
@@ -128,6 +133,7 @@ Al dar click en la opción "Borrar" en la esquina superior derecha, se aplicará
 
 Edición de datos
 ----------------
+[Regresar al índice](#índice)
 
 ### 18\. Edición de datos
 
@@ -149,6 +155,7 @@ Al dar click en "GUARDAR", los cambios se verán reflejados en el sitema.
 
 Proyectos
 ---------
+[Regresar al índice](#índice)
 
 ### 21\. Manejo de proyectos
 
@@ -174,6 +181,7 @@ El proyecto se reflejará en el sistema.
 
 Donaciones
 ----------
+[Regresar al índice](#índice)
 
 ### 25\. Manejo de donaciones
 
@@ -207,6 +215,7 @@ Llenar los campos requeridos y seleccionar el correo de algún donador existente
 
 Resumen de datos (Dashboard)
 ----------------------------
+[Regresar al índice](#índice)
 
 ### 29\. Selección de Dashboard
 
