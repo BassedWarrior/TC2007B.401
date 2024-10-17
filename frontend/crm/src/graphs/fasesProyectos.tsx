@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useGetOne, Loading } from "react-admin";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 interface ProyectoFaseData {
@@ -7,27 +7,29 @@ interface ProyectoFaseData {
   count: number;
 }
 
+interface GraphData {
+    [key:string]: ProyectoFaseData
+};
+
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export const ProyectosPorFase: React.FC = () => {
-  const [data, setData] = useState<{ name: string; value: number }[]>([]);
+    const { data: graph, isPending, error } = useGetOne<GraphData>("graphs", { id: "proyectos-fases" });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<ProyectoFaseData[]>('https://localhost:5001/api/proyectos/graphs');
-        const formattedData = response.data.map((item) => ({
-          name: item.phase,
-          value: item.count
-        }));
-        setData(formattedData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    if (isPending) {
+        return <Loading />
+    };
+    if (error) {
+        return <Error />
+    };
+    if (!graph) {
+        return null;
     };
 
-    fetchData();
-  }, []);
+    const formattedData = graph.data.map((item) => ({
+        name: item.phase,
+        value: item.count
+    }));
 
   return (
     <div>
@@ -35,7 +37,7 @@ export const ProyectosPorFase: React.FC = () => {
       <ResponsiveContainer width="100%" height={400}>
         <PieChart>
           <Pie
-            data={data}
+            data={formattedData}
             cx="50%"
             cy="50%"
             label={({ name, value }) => `${name}: ${value}`}
@@ -43,7 +45,7 @@ export const ProyectosPorFase: React.FC = () => {
             fill="#8884d8"
             dataKey="value"
           >
-            {data.map((entry, index) => (
+            {formattedData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
