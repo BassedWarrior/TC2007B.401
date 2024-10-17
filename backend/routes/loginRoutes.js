@@ -7,7 +7,7 @@ const router = express.Router();  // Gerente de rutas y de endpoints
 const loginController = require("../controllers/loginController");
 
 router.use((req, res, next) => {
-    console.log("%s %s %s", req.method, req.url, req.path);
+    console.log("Login: %s %s %s", req.method, req.url, req.path);
     next();
 });
 

@@ -9,7 +9,7 @@ const donacionController = require("../controllers/donacionController");
 const auth = require("../middlewares/auth");
 
 router.use((req, res, next) => {
-    console.log("%s %s %s", req.method, req.url, req.path);
+    console.log("Donaciones: %s %s %s", req.method, req.url, req.path);
     next();
 });
 router.use(auth.authenticateJWT);
@@ -21,14 +21,6 @@ router.route("/")
     .get(donacionController.getAllDonaciones)
     // HTTP POST: Agregar una donación a la base de datos.
     .post(donacionController.createDonacion)
-
-router.route("/graphsTipo")
-    // HTTP GET: Agregar una donación a la base de datos.
-    .get(donacionController.getTotalDonacionesByTipo)
-    
-router.route("/graphsMes")
-    // HTTP GET: Agregar una donación a la base de datos.
-    .get(donacionController.getDonacionesMensuales) 
 
 // Endpoints de distintos métodos HTTP para la ruta a un objeto específico.
 // Referente a una solo donación de la base de datos.

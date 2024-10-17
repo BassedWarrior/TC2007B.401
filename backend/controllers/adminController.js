@@ -119,12 +119,21 @@ exports.updateAdminById = async (req, res) => {
 exports.deleteAdminById = async (req, res) => {
     const { id } = sanitizeInput(req.params);
     try {
+        const adminCount = await Admin.countDocuments();
+
+        if (adminCount <= 1) {
+            return res.status(304).json({
+                error: "Cannot delete admin if only one exists",
+            });
+        }
+
         const deletedAdmin = await Admin.findByIdAndDelete(id);
 
-        if (!deletedAdmin)
+        if (!deletedAdmin) {
             return res
                 .status(404)
                 .json({ error: "Administrador no encontrado" });
+        }
 
         res.json({
             message: "Administrador eliminado con éxito",

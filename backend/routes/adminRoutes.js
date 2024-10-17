@@ -9,7 +9,7 @@ const adminController = require("../controllers/adminController");
 const auth = require("../middlewares/auth");
 
 router.use((req, res, next) => {
-    console.log("%s %s %s", req.method, req.url, req.path);
+    console.log("Admins: %s %s %s", req.method, req.url, req.path);
     next();
 });
 router.use(auth.authenticateJWT);
