@@ -14,8 +14,8 @@ const donacionRoutes = require("./routes/donacionRoutes");
 const proyectoRoutes = require("./routes/proyectoRoutes");
 // Rutas de endpoints para el inicio de sesión
 const loginRoutes = require("./routes/loginRoutes");
-// Esquema de administrador para registro.
-const Admin = require("./models/Admin");
+// Rutas de endpoints para las gráficas
+const graphRoutes = require("./routes/graphRoutes");
 
 const auth = require("./middlewares/auth");  // Utilizado para autenticación.
 
@@ -53,35 +53,8 @@ app.use("/api/proyectos", proyectoRoutes);
 // Utilizar rutas de endpoints para inicio de sesión
 app.use("/api/login", loginRoutes);
 
-// Registrar un nuevo usuario
-app.post("/api/registro", async (req, res) => {
-    try {
-        const sanitizedBody = sanitizeInput(req.body);
-        const { usuario, contrasena, correo, nombre, apellido, rol } =
-            sanitizedBody;
-
-        const Hashcontrasena = await bcrypt.hash(contrasena, 10);
-
-        const newAdmin = new Admin({
-            usuario,
-            contrasena: Hashcontrasena,
-            correo,
-            nombre,
-            apellido,
-            rol,
-        });
-
-        await newAdmin.save();
-
-        res.status(201).json({ message: "Usuario registrado con éxito" });
-        console.log("Administrador registrado con éxito");
-        console.log("Usuario: ", usuario);
-        console.log("Contraseña Hasheada: ", Hashcontrasena);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ error: "Error al registrar el usuario" });
-    }
-});
+// Utilizar rutas de endpoints para gráficas.
+app.use("/api/graphs", graphRoutes);
 
 app.get("/", (req, res) => {
     res.send("This is the backend URI");
