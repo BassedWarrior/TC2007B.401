@@ -14,6 +14,8 @@ const donacionRoutes = require("./routes/donacionRoutes");
 const proyectoRoutes = require("./routes/proyectoRoutes");
 // Rutas de endpoints para el inicio de sesión
 const loginRoutes = require("./routes/loginRoutes");
+//Ruta para la página de donaciones
+const donar_ahoraRoutes = require("./routes/donar_ahoraRoutes");
 // Esquema de administrador para registro.
 const Admin = require("./models/Admin");
 
@@ -49,6 +51,7 @@ app.use("/api/admins", adminRoutes);
 app.use("/api/donadores", donadorRoutes);
 app.use("/api/donaciones", donacionRoutes);
 app.use("/api/proyectos", proyectoRoutes);
+app.use("/api/donar_ahora", donar_ahoraRoutes);
 
 // Utilizar rutas de endpoints para inicio de sesión
 app.use("/api/login", loginRoutes);
