@@ -1,13 +1,4 @@
-Aquí tienes el manual con un índice que enlaza a cada sección:
-
 # Manual de Usuario Sistema CRM Fundación Sanders
-
-* * *
-
-*   Created by Miguel Enrique Soria Centeno on 17/10/2024
-*   [Edit original on dubble](https://dubble.so/guides/manual-de-usuario-sistema-crm-fundacion-sanders-sv9g0hsagl22wlyto5ek)
-
-* * *
 
 <video controls=""><source src="https://dubble.so/media/video/2e84986a-d9a8-4a47-acdb-ff3fb9f28b29" type="video/mp4"></video>
 
