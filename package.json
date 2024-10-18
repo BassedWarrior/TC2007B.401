@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "start": "concurrently --names \"DONOS,BACK,FRONT\" -c \"red,blue,green\" \"npm run start:frontend-donos\" \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd backend && node index.js",
+    "start:frontend": "cd frontend && cd crm && npm run dev",
+    "start:frontend-donos": "cd frontend && cd donaciones && npm start",
+    "dependencies": "concurrently --names \"ROOT,DONOS,BACK,FRONT\" -c \"orange,red,blue,green\" \"npm i\" \"npm run dependencies:frontend-donos\" \"npm run dependencies:backend\" \"npm run dependencies:frontend\"",
+    "dependencies:backend": "cd backend && npm i",
+    "dependencies:frontend": "cd frontend && cd crm && npm i",
+    "dependencies:frontend-donos": "cd frontend && cd donaciones && npm i"
+  },
+  "dependencies": {
+    "concurrent": "^0.3.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
