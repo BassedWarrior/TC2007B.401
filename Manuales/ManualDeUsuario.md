@@ -202,7 +202,7 @@ Llenar los campos requeridos y seleccionar el correo de algún donador existente
 
 ![](https://d3q7ie80jbiqey.cloudfront.net/media/image/zoom/aad7a918-514d-45f3-add4-a081fa7e7a34/1/57.682291666667/80.026109660574?0)
 
-> ### Requisito de donación
+### Requisito de donación
 > [!WARNING]
 > Una donación no puede ser creada sin un donador registrado en el sistema.
 
@@ -210,7 +210,7 @@ Llenar los campos requeridos y seleccionar el correo de algún donador existente
 
 ![](https://d3q7ie80jbiqey.cloudfront.net/media/image/zoom/9226bf00-89fd-4924-8294-e7c0669b46e5/2.5/18.619791666667/62.911226357243?0)
 
-> ### Correo autimatizado
+### Correo autimatizado
 > [!TIP]
 > La creación de donaciones, en efectivo o digital, enviará un correo de agradecimiento personalizado al correo seleccionado.
 
