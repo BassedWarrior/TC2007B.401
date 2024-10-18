@@ -2,6 +2,14 @@
 Integración de seguridad informática en redes y sistemas de software (Gpo 401).
 Repo del equipo.
 
+# Instalación
+
+## Clonar el repositorio
+
+```
+git clone https://github.com/BassedWarrior/TC2007B.401
+```
+
 ## Certificados y HTTPS
 
 Como prueba de concepto, este proyecto únicamente contempla la utilización
@@ -11,7 +19,7 @@ que localmente, se cuente con los certificados requeridos para correr el
 proyecto con HTTPS.
 
 Dentro de los directorios de `/frontend` y `/backend`, se requiere generar
-subdirectorios `/frontend/certs` y `/backend/certs`, y dentro de estos, se
+subdirectorios `/frontend/crm/certs` y `/backend/certs`, y dentro de estos, se
 deben correr los siguientes comandos en terminal:
 
 1. Generar una llave privada para la Autoridad Certificadora (CA):
@@ -45,3 +53,49 @@ De modo que se ignore completamente todo el contenido del directorio, ya que
 no se deben de publicar las llaves, ni los certificados como buena práctica de
 seguridad. Aún si fuera inconsecuente ya que es únicamente una prueba de
 concepto como parte de los requisitos de la materia.
+
+## Variables de entorno
+
+### Backend
+En la raíz de `\backend` debe existir un archivo `.env` con los siguientes elementos.
+
+```
+  MONGO_URI=mongodb://localhost:27017/SandersDB
+  PORT=5001
+  JWT_SECRET=super_secret_phrase
+  JWT_EXPIRATION_TIME=3600
+```
+
+### Frontend
+
+En `\frontend\crm`:
+```
+  VITE_API_URL=https://localhost:5001/api
+```
+
+En `\frontend\donaciones`:
+```
+  HTTPS=true
+```
+
+## Instalación de dependencias del proyecto
+
+En la raíz del proyecto, corre el comando:
+```npm run dependencies```
+
+## Creación de usuario administrativo
+
+En la raíz del proyecto, corre el comando:
+```npm run SUDOcreate```
+
+> [!WARNING]
+> Se necesita instalar en el sistema [Mongodb](https://www.mongodb.com/docs/manual/installation/) y [Mongosh](https://www.mongodb.com/try/download/shell) para poder correr la base de datos e insertar el usuario administrativo con este comando.
+
+Esto creara un usuario para acceder al crm con las siguientes credenciales:
+- Username: `admin`
+- Contraseña: `admin`
+
+## Correr el proyecto
+
+Utiliza el comando `npm start` para correr el proyecto. Si todo se instaló de manera apropiada deberías ver mensajes en la terminal de [DONOS], [FRONT] y [BACK].
+Puedes acceder al CRM con las credenciales creadas en la URL [https:localhost:5173](https://localhost:5173) y al portal de donaciones en la URL [https://localhost:3000](https://localhost:3000), o los puertos que se hayan configurado en los archivos `.env`.
