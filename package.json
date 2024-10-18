@@ -7,10 +7,12 @@
     "dependencies": "concurrently --names \"ROOT,DONOS,BACK,FRONT\" -c \"orange,red,blue,green\" \"npm i\" \"npm run dependencies:frontend-donos\" \"npm run dependencies:backend\" \"npm run dependencies:frontend\"",
     "dependencies:backend": "cd backend && npm i",
     "dependencies:frontend": "cd frontend && cd crm && npm i",
-    "dependencies:frontend-donos": "cd frontend && cd donaciones && npm i"
+    "dependencies:frontend-donos": "cd frontend && cd donaciones && npm i",
+    "SUDOcreate": "cd backend && cd setup && node insertAdmin.js"
   },
   "dependencies": {
-    "concurrent": "^0.3.2"
+    "concurrent": "^0.3.2",
+    "mongodb": "^6.9.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
