@@ -1,6 +1,13 @@
-# TC2007B.401
+# Sistema de CRM para Fundación Sanders 
+## TC2007B.401
 Integración de seguridad informática en redes y sistemas de software (Gpo 401).
 Repo del equipo.
+
+## Miembros de equipo
+- [Miguel Enrique Soria](https://github.com/MESC2004)
+- [Fausto Jiménez de la Cuesta Vallejo](https://github.com/BassedWarrior)
+- [Hector Julián Zárate Ramirez](https://github.com/HJZR2004)
+- [Valentina González Hernández](https://github.com/paydelimon22)
 
 # Instalación
 
@@ -97,5 +104,5 @@ Esto creara un usuario para acceder al crm con las siguientes credenciales:
 
 ## Correr el proyecto
 
-Utiliza el comando `npm start` para correr el proyecto. Si todo se instaló de manera apropiada deberías ver mensajes en la terminal de [DONOS], [FRONT] y [BACK].
+Utiliza el comando `npm start` para correr el proyecto. Si todo se instaló de manera apropiada deberías ver mensajes en la terminal de `[DONOS], [FRONT] y [BACK]`.
 Puedes acceder al CRM con las credenciales creadas en la URL [https:localhost:5173](https://localhost:5173) y al portal de donaciones en la URL [https://localhost:3000](https://localhost:3000), o los puertos que se hayan configurado en los archivos `.env`.
